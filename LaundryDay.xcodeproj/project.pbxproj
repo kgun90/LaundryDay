@@ -3,19 +3,22 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3D346942258618F9002D2AB5 /* StoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D346941258618F9002D2AB5 /* StoreDataManager.swift */; };
 		3DF73A612584C66C00997842 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF73A602584C66C00997842 /* AppDelegate.swift */; };
 		3DF73A632584C66C00997842 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF73A622584C66C00997842 /* SceneDelegate.swift */; };
 		3DF73A652584C66C00997842 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF73A642584C66C00997842 /* ViewController.swift */; };
 		3DF73A682584C66C00997842 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DF73A662584C66C00997842 /* Main.storyboard */; };
 		3DF73A6A2584C66F00997842 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3DF73A692584C66F00997842 /* Assets.xcassets */; };
 		3DF73A6D2584C66F00997842 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DF73A6B2584C66F00997842 /* LaunchScreen.storyboard */; };
+		7280C05FCB80748505D8D1D8 /* Pods_LaundryDay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8863594A827B14F24F61827B /* Pods_LaundryDay.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3D346941258618F9002D2AB5 /* StoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreDataManager.swift; sourceTree = "<group>"; };
 		3DF73A5D2584C66C00997842 /* LaundryDay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LaundryDay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DF73A602584C66C00997842 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3DF73A622584C66C00997842 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -24,6 +27,9 @@
 		3DF73A692584C66F00997842 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3DF73A6C2584C66F00997842 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3DF73A6E2584C66F00997842 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8863594A827B14F24F61827B /* Pods_LaundryDay.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LaundryDay.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D48C39F6493E23CC9D943F5A /* Pods-LaundryDay.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LaundryDay.debug.xcconfig"; path = "Target Support Files/Pods-LaundryDay/Pods-LaundryDay.debug.xcconfig"; sourceTree = "<group>"; };
+		F655790736AFA7BB55360F2C /* Pods-LaundryDay.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LaundryDay.release.xcconfig"; path = "Target Support Files/Pods-LaundryDay/Pods-LaundryDay.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +37,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7280C05FCB80748505D8D1D8 /* Pods_LaundryDay.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +49,8 @@
 			children = (
 				3DF73A5F2584C66C00997842 /* LaundryDay */,
 				3DF73A5E2584C66C00997842 /* Products */,
+				713911BC76C9386BB810553F /* Pods */,
+				C6DA5A43EFBE0D8D9A2AC7C7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -63,8 +72,26 @@
 				3DF73A692584C66F00997842 /* Assets.xcassets */,
 				3DF73A6B2584C66F00997842 /* LaunchScreen.storyboard */,
 				3DF73A6E2584C66F00997842 /* Info.plist */,
+				3D346941258618F9002D2AB5 /* StoreDataManager.swift */,
 			);
 			path = LaundryDay;
+			sourceTree = "<group>";
+		};
+		713911BC76C9386BB810553F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D48C39F6493E23CC9D943F5A /* Pods-LaundryDay.debug.xcconfig */,
+				F655790736AFA7BB55360F2C /* Pods-LaundryDay.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		C6DA5A43EFBE0D8D9A2AC7C7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8863594A827B14F24F61827B /* Pods_LaundryDay.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,9 +101,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3DF73A712584C66F00997842 /* Build configuration list for PBXNativeTarget "LaundryDay" */;
 			buildPhases = (
+				11BD80C699ED079D6AB4C490 /* [CP] Check Pods Manifest.lock */,
 				3DF73A592584C66C00997842 /* Sources */,
 				3DF73A5A2584C66C00997842 /* Frameworks */,
 				3DF73A5B2584C66C00997842 /* Resources */,
+				DCB9BEDE8392719FDF1DC39B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -132,6 +161,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		11BD80C699ED079D6AB4C490 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-LaundryDay-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DCB9BEDE8392719FDF1DC39B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-LaundryDay/Pods-LaundryDay-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-LaundryDay/Pods-LaundryDay-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LaundryDay/Pods-LaundryDay-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		3DF73A592584C66C00997842 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -140,6 +211,7 @@
 				3DF73A652584C66C00997842 /* ViewController.swift in Sources */,
 				3DF73A612584C66C00997842 /* AppDelegate.swift in Sources */,
 				3DF73A632584C66C00997842 /* SceneDelegate.swift in Sources */,
+				3D346942258618F9002D2AB5 /* StoreDataManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,6 +355,7 @@
 		};
 		3DF73A722584C66F00997842 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D48C39F6493E23CC9D943F5A /* Pods-LaundryDay.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -296,12 +369,13 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.kang.LaundryDay;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		3DF73A732584C66F00997842 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F655790736AFA7BB55360F2C /* Pods-LaundryDay.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -315,7 +389,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.kang.LaundryDay;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
