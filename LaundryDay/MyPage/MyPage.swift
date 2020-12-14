@@ -50,16 +50,27 @@ class MyPage: UIViewController {
     lazy var recentViewedStore: UIButton = {
         let button = UIButton()
         button.setTitle("최근 본 세탁소", for: .normal)
-        button.tintColor = UIColor(hex: 0x004aad)
-        button.setTitleColor(UIColor(hex: 0x004aad), for: .normal)
+
+        button.setTitleColor(.titleBlue, for: .normal)
         return button
     }()
     
-    let customView = MyPageCustomView()
+    lazy var favoriteStore: UIButton = {
+        let button = UIButton()
+        button.setTitle("찜한 세탁소", for: .normal)
+        button.setTitleColor(.titleBlue, for: .normal)
+        return button
+    }()
+    
+    let recentViewCell = MyPageCustomView()
+    
+    let favorite1 = MyPageCustomView()
+    let favorite2 = MyPageCustomView()
+    let favorite3 = MyPageCustomView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(hex: 0xf5f9ff)
+        view.backgroundColor = .mainBackground
         layout()
     }
 
@@ -70,7 +81,12 @@ class MyPage: UIViewController {
         topView.addSubview(myReviewButton)
         topView.addSubview(reportStoreButton)
         view.addSubview(recentViewedStore)
-        view.addSubview(customView)
+        view.addSubview(recentViewCell)
+        view.addSubview(favoriteStore)
+        
+        view.addSubview(favorite1)
+        view.addSubview(favorite2)
+        view.addSubview(favorite3)
         
         topView.snp.makeConstraints {
             $0.top.equalToSuperview()
@@ -103,10 +119,31 @@ class MyPage: UIViewController {
             $0.top.equalTo(topView.snp.bottom).offset(30)
             $0.leading.equalTo(view.snp.leading).offset(37)
         }
-        customView.snp.makeConstraints {
+        recentViewCell.snp.makeConstraints {
             $0.top.equalTo(recentViewedStore.snp.bottom).offset(6)
-            $0.trailing.equalTo(view.snp.trailing).offset(14)
-            $0.width.equalTo(352)
+            $0.trailing.equalTo(view.snp.trailing).offset(-14)
+            $0.width.equalTo(Device.screenWidth * 0.85)
+        }
+        
+        favoriteStore.snp.makeConstraints {
+            $0.top.equalTo(recentViewCell.snp.bottom).offset(20)
+            $0.leading.equalTo(view.snp.leading).offset(37)
+        }
+        
+        favorite1.snp.makeConstraints {
+            $0.top.equalTo(favoriteStore.snp.bottom).offset(6)
+            $0.trailing.equalTo(view.snp.trailing).offset(-14)
+            $0.width.equalTo(Device.screenWidth * 0.85)
+        }
+        favorite2.snp.makeConstraints {
+            $0.top.equalTo(favorite1.snp.bottom).offset(11)
+            $0.trailing.equalTo(view.snp.trailing).offset(-14)
+            $0.width.equalTo(Device.screenWidth * 0.85)
+        }
+        favorite3.snp.makeConstraints {
+            $0.top.equalTo(favorite2.snp.bottom).offset(11)
+            $0.trailing.equalTo(view.snp.trailing).offset(-14)
+            $0.width.equalTo(Device.screenWidth * 0.85)
         }
     }
 }

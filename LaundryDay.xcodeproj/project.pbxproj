@@ -16,6 +16,9 @@
 		3D34695925875D8F002D2AB5 /* MyPageCustomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D34695825875D8F002D2AB5 /* MyPageCustomView.xib */; };
 		3D34695C25875DA4002D2AB5 /* MyPageCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D34695B25875DA4002D2AB5 /* MyPageCustomView.swift */; };
 		3DEDE1EE25876BEB00D2BB2B /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEDE1ED25876BEB00D2BB2B /* UIView.swift */; };
+		3DEDE1F12587D3F000D2BB2B /* NearStoreListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEDE1F02587D3F000D2BB2B /* NearStoreListVC.swift */; };
+		3DEDE1F42587DB4D00D2BB2B /* StoreListCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEDE1F32587DB4D00D2BB2B /* StoreListCustomView.swift */; };
+		3DEDE1F82587DB5F00D2BB2B /* StoreListCustomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DEDE1F72587DB5F00D2BB2B /* StoreListCustomView.xib */; };
 		3DF73A612584C66C00997842 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF73A602584C66C00997842 /* AppDelegate.swift */; };
 		3DF73A632584C66C00997842 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF73A622584C66C00997842 /* SceneDelegate.swift */; };
 		3DF73A652584C66C00997842 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF73A642584C66C00997842 /* ViewController.swift */; };
@@ -35,6 +38,9 @@
 		3D34695825875D8F002D2AB5 /* MyPageCustomView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyPageCustomView.xib; sourceTree = "<group>"; };
 		3D34695B25875DA4002D2AB5 /* MyPageCustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageCustomView.swift; sourceTree = "<group>"; };
 		3DEDE1ED25876BEB00D2BB2B /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		3DEDE1F02587D3F000D2BB2B /* NearStoreListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearStoreListVC.swift; sourceTree = "<group>"; };
+		3DEDE1F32587DB4D00D2BB2B /* StoreListCustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreListCustomView.swift; sourceTree = "<group>"; };
+		3DEDE1F72587DB5F00D2BB2B /* StoreListCustomView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StoreListCustomView.xib; sourceTree = "<group>"; };
 		3DF73A5D2584C66C00997842 /* LaundryDay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LaundryDay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DF73A602584C66C00997842 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3DF73A622584C66C00997842 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -92,6 +98,7 @@
 		3DF73A542584C66C00997842 = {
 			isa = PBXGroup;
 			children = (
+				3DEDE1F02587D3F000D2BB2B /* NearStoreListVC.swift */,
 				3DF73A5F2584C66C00997842 /* LaundryDay */,
 				3DF73A5E2584C66C00997842 /* Products */,
 				713911BC76C9386BB810553F /* Pods */,
@@ -121,6 +128,8 @@
 				3DF73A6E2584C66F00997842 /* Info.plist */,
 				3D346941258618F9002D2AB5 /* StoreDataManager.swift */,
 				3D34695F25875DC6002D2AB5 /* MyPage */,
+				3DEDE1F32587DB4D00D2BB2B /* StoreListCustomView.swift */,
+				3DEDE1F72587DB5F00D2BB2B /* StoreListCustomView.xib */,
 			);
 			path = LaundryDay;
 			sourceTree = "<group>";
@@ -202,6 +211,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3DF73A6D2584C66F00997842 /* LaunchScreen.storyboard in Resources */,
+				3DEDE1F82587DB5F00D2BB2B /* StoreListCustomView.xib in Resources */,
 				3DF73A6A2584C66F00997842 /* Assets.xcassets in Resources */,
 				3D34695925875D8F002D2AB5 /* MyPageCustomView.xib in Resources */,
 				3DF73A682584C66C00997842 /* Main.storyboard in Resources */,
@@ -257,10 +267,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3DEDE1F12587D3F000D2BB2B /* NearStoreListVC.swift in Sources */,
 				3D34695C25875DA4002D2AB5 /* MyPageCustomView.swift in Sources */,
 				3DF73A652584C66C00997842 /* ViewController.swift in Sources */,
 				3DEDE1EE25876BEB00D2BB2B /* UIView.swift in Sources */,
 				3D346950258746F4002D2AB5 /* UIColor.swift in Sources */,
+				3DEDE1F42587DB4D00D2BB2B /* StoreListCustomView.swift in Sources */,
 				3DF73A612584C66C00997842 /* AppDelegate.swift in Sources */,
 				3DF73A632584C66C00997842 /* SceneDelegate.swift in Sources */,
 				3D3469532587470D002D2AB5 /* UIFont.swift in Sources */,

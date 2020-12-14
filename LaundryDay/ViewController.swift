@@ -43,6 +43,7 @@ class ViewController: UIViewController, StoreDataDelegate {
     lazy var listButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "List"), for: .normal)
+        button.addTarget(self, action: #selector(listAction), for: .touchUpInside)
         return button
     }()
     
@@ -155,6 +156,16 @@ class ViewController: UIViewController, StoreDataDelegate {
         transitionType = .menu
         
         present(myPage, animated: true, completion: nil)
+    }
+    
+    @objc func listAction() {
+        let listPage = NearStoreListVC()
+        
+        listPage.transitioningDelegate = self
+        listPage.modalPresentationStyle = .custom
+        transitionType = .slide
+        
+        present(listPage, animated: true, completion: nil)
     }
 }
 
