@@ -54,6 +54,7 @@ struct StoreDataManager {
                         ))
                     }
                 }
+                
                 self.delegate?.updateStoreData(data: storeInfo)
             case .failure(let error):
                 print("error: \(error.localizedDescription)")
