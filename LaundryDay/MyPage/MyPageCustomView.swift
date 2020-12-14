@@ -8,13 +8,28 @@
 import UIKit
 
 class MyPageCustomView: UIView {
-
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    @IBOutlet weak var storeNameLabel: UILabel!
+    @IBOutlet weak var storeDistanceLabel: UILabel!
+    @IBOutlet weak var storeAddressLabel: UILabel!
+    @IBOutlet weak var storeDialView: UIView!
+    @IBOutlet weak var storeRouteView: UIView!
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.commonInit()
     }
-    */
 
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        self.commonInit()
+    }
+
+    private func commonInit(){
+        guard let view = loadView(nibName: "MyPageCustomView") else { return }
+        
+        view.frame = self.bounds
+                
+
+        self.addSubview(view)
+    }
 }

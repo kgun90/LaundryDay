@@ -8,7 +8,15 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MyPageCustomView" customModule="LaundryDay" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MyPageCustomView" customModule="LaundryDay" customModuleProvider="target">
+            <connections>
+                <outlet property="storeAddressLabel" destination="e0y-rZ-mFo" id="umt-AL-Rjh"/>
+                <outlet property="storeDialView" destination="bqc-Jg-PHH" id="Mj5-cm-C9J"/>
+                <outlet property="storeDistanceLabel" destination="mLZ-1t-vCt" id="E3j-YK-ZVI"/>
+                <outlet property="storeNameLabel" destination="pn2-GG-Vph" id="oqJ-PB-f50"/>
+                <outlet property="storeRouteView" destination="VIw-fY-4or" id="JiU-y9-wlN"/>
+            </connections>
+        </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
@@ -35,36 +43,80 @@
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CoinMarker" translatesAutoresizingMaskIntoConstraints="NO" id="6er-Ow-pOh">
                     <rect key="frame" x="15" y="48" width="16" height="16"/>
                 </imageView>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BKQ-0i-2T7">
-                    <rect key="frame" x="42" y="71" width="45" height="28"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="13"/>
-                    <state key="normal" title="전화걸기">
-                        <color key="titleColor" systemColor="labelColor"/>
-                    </state>
-                </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bqc-Jg-PHH">
+                    <rect key="frame" x="0.0" y="65" width="160" height="35"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="phone" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="G1U-8F-LS5">
+                            <rect key="frame" x="50" y="8" width="20.5" height="18.5"/>
+                            <color key="tintColor" red="0.69411764705882351" green="0.66274509803921566" blue="0.66274509803921566" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="전화걸기" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CBi-pO-tQ7">
+                            <rect key="frame" x="73.5" y="9.5" width="45" height="16"/>
+                            <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="13"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstItem="CBi-pO-tQ7" firstAttribute="centerY" secondItem="bqc-Jg-PHH" secondAttribute="centerY" id="4Xq-4i-hMR"/>
+                        <constraint firstItem="G1U-8F-LS5" firstAttribute="centerY" secondItem="bqc-Jg-PHH" secondAttribute="centerY" id="MyU-o7-Ad7"/>
+                        <constraint firstAttribute="height" constant="35" id="S8g-wF-pDH"/>
+                        <constraint firstItem="CBi-pO-tQ7" firstAttribute="leading" secondItem="G1U-8F-LS5" secondAttribute="trailing" constant="3" id="URQ-Vi-rtO"/>
+                        <constraint firstItem="G1U-8F-LS5" firstAttribute="leading" secondItem="bqc-Jg-PHH" secondAttribute="leading" constant="50" id="cE4-J4-3FC"/>
+                        <constraint firstAttribute="width" constant="160" id="eCB-0v-ztl"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VIw-fY-4or">
+                    <rect key="frame" x="160" y="65" width="160" height="35"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="map" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="QmL-N6-7Ej">
+                            <rect key="frame" x="50" y="8" width="21.5" height="18.5"/>
+                            <color key="tintColor" red="0.69411764710000001" green="0.66274509800000003" blue="0.66274509800000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="지도보기" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a2n-vN-bvN">
+                            <rect key="frame" x="74.5" y="9.5" width="45" height="16"/>
+                            <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="13"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="35" id="9up-Z8-8Em"/>
+                        <constraint firstItem="a2n-vN-bvN" firstAttribute="centerY" secondItem="QmL-N6-7Ej" secondAttribute="centerY" id="AOz-FE-Cra"/>
+                        <constraint firstItem="QmL-N6-7Ej" firstAttribute="centerY" secondItem="VIw-fY-4or" secondAttribute="centerY" id="Rnt-o0-qBe"/>
+                        <constraint firstAttribute="width" constant="160" id="kTS-85-ePC"/>
+                        <constraint firstItem="QmL-N6-7Ej" firstAttribute="leading" secondItem="VIw-fY-4or" secondAttribute="leading" constant="50" id="udu-Mt-T3Q"/>
+                        <constraint firstItem="a2n-vN-bvN" firstAttribute="leading" secondItem="QmL-N6-7Ej" secondAttribute="trailing" constant="3" id="w82-8N-I5e"/>
+                    </constraints>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="e0y-rZ-mFo" firstAttribute="leading" secondItem="mLZ-1t-vCt" secondAttribute="trailing" constant="8" id="2JF-Zd-aGb"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="VIw-fY-4or" secondAttribute="bottom" id="7If-Ha-nf3"/>
                 <constraint firstItem="pn2-GG-Vph" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="19" id="BdI-hU-dUm"/>
+                <constraint firstItem="bqc-Jg-PHH" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Gk5-Gg-m6O"/>
                 <constraint firstAttribute="top" secondItem="pn2-GG-Vph" secondAttribute="top" constant="-17" id="Nze-19-yV0"/>
+                <constraint firstItem="bqc-Jg-PHH" firstAttribute="top" secondItem="6er-Ow-pOh" secondAttribute="bottom" constant="1" id="WXW-Ow-66o"/>
                 <constraint firstItem="mLZ-1t-vCt" firstAttribute="leading" secondItem="6er-Ow-pOh" secondAttribute="trailing" id="Wr8-Jz-VbU"/>
+                <constraint firstAttribute="bottom" secondItem="bqc-Jg-PHH" secondAttribute="bottom" id="b6q-qp-NNm"/>
                 <constraint firstItem="mLZ-1t-vCt" firstAttribute="centerY" secondItem="6er-Ow-pOh" secondAttribute="centerY" id="deD-sq-kjM"/>
                 <constraint firstItem="6er-Ow-pOh" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="15" id="iZd-D7-amf"/>
                 <constraint firstItem="6er-Ow-pOh" firstAttribute="top" secondItem="pn2-GG-Vph" secondAttribute="bottom" constant="9" id="idg-XV-Yfa"/>
                 <constraint firstItem="e0y-rZ-mFo" firstAttribute="centerY" secondItem="mLZ-1t-vCt" secondAttribute="centerY" id="x7n-XG-5Tv"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="VIw-fY-4or" secondAttribute="trailing" id="yWT-LY-Faf"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="101.44927536231884" y="66.294642857142861"/>
+            <point key="canvasLocation" x="104" y="66"/>
         </view>
     </objects>
     <resources>
         <image name="CoinMarker" width="16" height="16"/>
-        <systemColor name="labelColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
+        <image name="map" catalog="system" width="128" height="110"/>
+        <image name="phone" catalog="system" width="128" height="115"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

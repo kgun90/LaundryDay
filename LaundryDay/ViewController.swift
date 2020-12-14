@@ -184,7 +184,7 @@ extension ViewController: BonsaiControllerDelegate {
         case .none:
             return CGRect(origin: .zero, size: containerViewFrame.size)
         case .menu:
-           return CGRect(origin: CGPoint(x: 0, y: containerViewFrame.height * 0.11), size: CGSize(width: containerViewFrame.width * 0.86, height: containerViewFrame.height ))
+           return CGRect(origin: CGPoint(x: 0, y: containerViewFrame.height * 0.11), size: CGSize(width: Device.screenWidth * 0.9, height: containerViewFrame.height ))
         case .slide:
             return  CGRect(origin: .zero, size: containerViewFrame.size)
            
