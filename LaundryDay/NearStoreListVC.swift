@@ -38,9 +38,27 @@ class NearStoreListVC: UIViewController {
         return label
     }()
     
+    lazy var storeTableView: UITableView = {
+        let tv = UITableView()
+       
+        return tv
+    }()
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableViewSet()
         layout()
+    }
+    
+    func tableViewSet() {
+        storeTableView.delegate = self
+        storeTableView.dataSource = self
+        storeTableView.separatorColor = .clear
+        storeTableView.backgroundColor = .mainBackground
+        
+        storeTableView.register(UINib(nibName: "StoreListCustomView", bundle: nil), forCellReuseIdentifier: "StoreListCustomView")
     }
     
     func layout() {
@@ -49,6 +67,7 @@ class NearStoreListVC: UIViewController {
         topView.addSubview(backButton)
         topView.addSubview(searchButton)
         topView.addSubview(topViewLabel)
+        view.addSubview(storeTableView)
         
         topView.snp.makeConstraints {
             $0.top.equalToSuperview()
@@ -69,10 +88,31 @@ class NearStoreListVC: UIViewController {
             $0.centerX.equalToSuperview()
             $0.centerY.equalTo(backButton.snp.centerY)
         }
+        storeTableView.snp.makeConstraints {
+            $0.top.equalTo(topView.snp.bottom).offset(10)
+            $0.centerX.equalToSuperview()
+            $0.width.equalTo(Device.screenWidth)
+            $0.bottom.equalToSuperview()
+        }
+        
     }
     
     @objc private func backAction() {
         self.dismiss(animated: true, completion: nil)
     }
     
+}
+
+extension NearStoreListVC: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 5
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "StoreListCustomView", for: indexPath as IndexPath) as! StoreListCustomView
+    
+        return cell
+    }
+
+
 }

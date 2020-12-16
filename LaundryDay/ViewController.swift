@@ -13,6 +13,7 @@ import CoreLocation
 
 private enum TransitionType {
     case none
+    case bottom
     case slide
     case menu
 }
@@ -74,6 +75,7 @@ class ViewController: UIViewController, StoreDataDelegate {
         
         storeDataManager.delegate = self
         storeDataManager.requestStoreData()
+//        storeDataManager.requestFSData()
     }
 
     func layout() {
@@ -142,10 +144,38 @@ class ViewController: UIViewController, StoreDataDelegate {
                 marker.height = 40
                 marker.iconImage = NMFOverlayImage(name: "Laundry_marker")
                 marker.mapView = self.mapView
-
+                
+                let handler = { (overlay: NMFOverlay) -> Bool in
+                    if let _ = overlay as? NMFMarker {
+                        let distance = self.currentLocation.distance(from: location)
+                        self.showBtmView(data[i].name, data[i].address, distance, "고유주소", data[i].phoneNum)
+                    }
+                    return true
+                }
+                marker.touchHandler = handler
             }
 
         }
+    }
+    
+    func getStoreData(data: [StoreData]) {
+//        print(data)
+    }
+    
+    func showBtmView(_ storeName: String, _ storeAddress: String, _ storeDistance: CLLocationDistance, _ serial: String, _ phone: String) {
+        dismiss(animated: true, completion: nil)
+        let smallVC = BottomCustomView()
+        
+        smallVC.transitioningDelegate = self
+        smallVC.modalPresentationStyle = .custom
+        transitionType = .bottom
+        
+        smallVC.storeName = storeName
+        smallVC.storeAddress = storeAddress
+        smallVC.storeDistance = String(format: "%.1fkm", storeDistance/1000.0)
+        
+  
+        present(smallVC, animated: true, completion: nil)
     }
     
     @objc func myPageAction() {
@@ -178,7 +208,6 @@ extension ViewController: CLLocationManagerDelegate {
             
             self.mapView.moveCamera(NMFCameraUpdate(scrollTo: NMGLatLng(lat: lat, lng: lon)))
             self.currentLocation = location
-
             
         }
     }
@@ -194,6 +223,8 @@ extension ViewController: BonsaiControllerDelegate {
         switch transitionType {
         case .none:
             return CGRect(origin: .zero, size: containerViewFrame.size)
+        case .bottom:
+           return CGRect(origin: CGPoint(x: 0, y: 660), size: CGSize(width: containerViewFrame.width, height: 152 ))
         case .menu:
            return CGRect(origin: CGPoint(x: 0, y: containerViewFrame.height * 0.11), size: CGSize(width: Device.screenWidth * 0.9, height: containerViewFrame.height ))
         case .slide:
@@ -208,6 +239,8 @@ extension ViewController: BonsaiControllerDelegate {
         switch transitionType {
         case .none:
             return BonsaiController(fromDirection: .bottom, blurEffectStyle: blurEffectStyle, presentedViewController: presented, delegate: self)
+        case .bottom:
+            return BonsaiController(fromDirection: .bottom, backgroundColor: UIColor.clear, presentedViewController: presented, delegate: self)
         case .menu:
             return BonsaiController(fromDirection: .left, blurEffectStyle: blurEffectStyle, presentedViewController: presented, delegate: self)
         case .slide:

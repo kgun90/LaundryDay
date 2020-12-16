@@ -8,9 +8,11 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import Firebase
 
 protocol StoreDataDelegate {
     func updateStoreData(data: [StoreInformation])
+    func getStoreData(data: [StoreData])
 }
 
 struct StoreInformation {
@@ -23,6 +25,13 @@ struct StoreInformation {
     let phoneNum: String
 }
 
+struct StoreData {
+    let address: String
+    let name: String
+    let latLon: GeoPoint
+    let phoneNum: String
+}
+
 struct StoreDataManager {
     var delegate: StoreDataDelegate?
     
@@ -31,6 +40,8 @@ struct StoreDataManager {
         "Content-Type": "application/json",
         "Accept": "application/json"
     ]
+    
+    let fs = Firestore.firestore()
     
     func requestStoreData() {
         let req = AF.request(URL)
@@ -58,6 +69,31 @@ struct StoreDataManager {
                 self.delegate?.updateStoreData(data: storeInfo)
             case .failure(let error):
                 print("error: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    func requestFSData() {
+        fs.collection("LAUNDRY").addSnapshotListener { (querySnapshot, error) in
+            var storeInfo: [StoreData] = []
+            
+            if let e = error {
+                print("There was an issue retrieving data from data from Firestore \(e)")
+            } else {
+                if let snapshotDocuments = querySnapshot?.documents {
+                    for doc in snapshotDocuments {
+                        let data = doc.data()
+                        let newData = StoreData(address: data["address"] as! String,
+                                                name: data["name"] as! String,
+                                                latLon: data["latLng"] as! GeoPoint,
+                                                phoneNum: data["number"] as! String)
+                        storeInfo.append(newData)
+                        self.delegate?.getStoreData(data: storeInfo)
+//                        if let name = data["name"] as? String {
+//
+//                        }
+                    }
+                }
             }
         }
     }

@@ -15,6 +15,10 @@
 		3D346956258750B8002D2AB5 /* MyPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D346955258750B8002D2AB5 /* MyPage.swift */; };
 		3D34695925875D8F002D2AB5 /* MyPageCustomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D34695825875D8F002D2AB5 /* MyPageCustomView.xib */; };
 		3D34695C25875DA4002D2AB5 /* MyPageCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D34695B25875DA4002D2AB5 /* MyPageCustomView.swift */; };
+		3D4E4F312589F1A600BE9FFF /* BottomCustomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D4E4F302589F1A600BE9FFF /* BottomCustomView.xib */; };
+		3D4E4F342589F1C800BE9FFF /* BottomCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4E4F332589F1C800BE9FFF /* BottomCustomView.swift */; };
+		3D4E4F37258A0E1200BE9FFF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3D4E4F36258A0E1200BE9FFF /* GoogleService-Info.plist */; };
+		3D4E4F5C258A4E6B00BE9FFF /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4E4F5B258A4E6B00BE9FFF /* LoginVC.swift */; };
 		3DEDE1EE25876BEB00D2BB2B /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEDE1ED25876BEB00D2BB2B /* UIView.swift */; };
 		3DEDE1F12587D3F000D2BB2B /* NearStoreListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEDE1F02587D3F000D2BB2B /* NearStoreListVC.swift */; };
 		3DEDE1F42587DB4D00D2BB2B /* StoreListCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEDE1F32587DB4D00D2BB2B /* StoreListCustomView.swift */; };
@@ -37,6 +41,10 @@
 		3D346955258750B8002D2AB5 /* MyPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPage.swift; sourceTree = "<group>"; };
 		3D34695825875D8F002D2AB5 /* MyPageCustomView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyPageCustomView.xib; sourceTree = "<group>"; };
 		3D34695B25875DA4002D2AB5 /* MyPageCustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageCustomView.swift; sourceTree = "<group>"; };
+		3D4E4F302589F1A600BE9FFF /* BottomCustomView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BottomCustomView.xib; sourceTree = "<group>"; };
+		3D4E4F332589F1C800BE9FFF /* BottomCustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomCustomView.swift; sourceTree = "<group>"; };
+		3D4E4F36258A0E1200BE9FFF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		3D4E4F5B258A4E6B00BE9FFF /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		3DEDE1ED25876BEB00D2BB2B /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		3DEDE1F02587D3F000D2BB2B /* NearStoreListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearStoreListVC.swift; sourceTree = "<group>"; };
 		3DEDE1F32587DB4D00D2BB2B /* StoreListCustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreListCustomView.swift; sourceTree = "<group>"; };
@@ -95,10 +103,20 @@
 			path = MyPage;
 			sourceTree = "<group>";
 		};
+		3D4E4F5A258A4CEA00BE9FFF /* Custom */ = {
+			isa = PBXGroup;
+			children = (
+				3DEDE1F32587DB4D00D2BB2B /* StoreListCustomView.swift */,
+				3DEDE1F72587DB5F00D2BB2B /* StoreListCustomView.xib */,
+				3D4E4F332589F1C800BE9FFF /* BottomCustomView.swift */,
+				3D4E4F302589F1A600BE9FFF /* BottomCustomView.xib */,
+			);
+			path = Custom;
+			sourceTree = "<group>";
+		};
 		3DF73A542584C66C00997842 = {
 			isa = PBXGroup;
 			children = (
-				3DEDE1F02587D3F000D2BB2B /* NearStoreListVC.swift */,
 				3DF73A5F2584C66C00997842 /* LaundryDay */,
 				3DF73A5E2584C66C00997842 /* Products */,
 				713911BC76C9386BB810553F /* Pods */,
@@ -127,9 +145,11 @@
 				3DF73A6B2584C66F00997842 /* LaunchScreen.storyboard */,
 				3DF73A6E2584C66F00997842 /* Info.plist */,
 				3D346941258618F9002D2AB5 /* StoreDataManager.swift */,
+				3DEDE1F02587D3F000D2BB2B /* NearStoreListVC.swift */,
 				3D34695F25875DC6002D2AB5 /* MyPage */,
-				3DEDE1F32587DB4D00D2BB2B /* StoreListCustomView.swift */,
-				3DEDE1F72587DB5F00D2BB2B /* StoreListCustomView.xib */,
+				3D4E4F5A258A4CEA00BE9FFF /* Custom */,
+				3D4E4F36258A0E1200BE9FFF /* GoogleService-Info.plist */,
+				3D4E4F5B258A4E6B00BE9FFF /* LoginVC.swift */,
 			);
 			path = LaundryDay;
 			sourceTree = "<group>";
@@ -163,6 +183,7 @@
 				3DF73A5A2584C66C00997842 /* Frameworks */,
 				3DF73A5B2584C66C00997842 /* Resources */,
 				DCB9BEDE8392719FDF1DC39B /* [CP] Embed Pods Frameworks */,
+				E983F60315A38E88098A452F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -212,9 +233,11 @@
 			files = (
 				3DF73A6D2584C66F00997842 /* LaunchScreen.storyboard in Resources */,
 				3DEDE1F82587DB5F00D2BB2B /* StoreListCustomView.xib in Resources */,
+				3D4E4F312589F1A600BE9FFF /* BottomCustomView.xib in Resources */,
 				3DF73A6A2584C66F00997842 /* Assets.xcassets in Resources */,
 				3D34695925875D8F002D2AB5 /* MyPageCustomView.xib in Resources */,
 				3DF73A682584C66C00997842 /* Main.storyboard in Resources */,
+				3D4E4F37258A0E1200BE9FFF /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,6 +283,23 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LaundryDay/Pods-LaundryDay-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		E983F60315A38E88098A452F /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-LaundryDay/Pods-LaundryDay-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-LaundryDay/Pods-LaundryDay-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LaundryDay/Pods-LaundryDay-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -271,6 +311,7 @@
 				3D34695C25875DA4002D2AB5 /* MyPageCustomView.swift in Sources */,
 				3DF73A652584C66C00997842 /* ViewController.swift in Sources */,
 				3DEDE1EE25876BEB00D2BB2B /* UIView.swift in Sources */,
+				3D4E4F342589F1C800BE9FFF /* BottomCustomView.swift in Sources */,
 				3D346950258746F4002D2AB5 /* UIColor.swift in Sources */,
 				3DEDE1F42587DB4D00D2BB2B /* StoreListCustomView.swift in Sources */,
 				3DF73A612584C66C00997842 /* AppDelegate.swift in Sources */,
@@ -280,6 +321,7 @@
 				3D34694D258746CF002D2AB5 /* IndicatorView.swift in Sources */,
 				3D3469492587468A002D2AB5 /* Device.swift in Sources */,
 				3D346956258750B8002D2AB5 /* MyPage.swift in Sources */,
+				3D4E4F5C258A4E6B00BE9FFF /* LoginVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

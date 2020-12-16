@@ -21,10 +21,20 @@ class MyPage: UIViewController {
         return iv
     }()
     
+    lazy var loginButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("로그인", for: .normal)
+        button.setTitleColor(.blue, for: .normal)
+        button.titleLabel?.font = .BasicFont(.regular, size: 18)
+        
+        button.addTarget(self, action: #selector(loginAction), for: .touchUpInside)
+        return button
+    }()
+    
     lazy var loginStatusLabel: UILabel = {
         let label = UILabel()
         label.font = .BasicFont(.regular, size: 18)
-        label.text = "로그인이 필요합니다."
+        label.text = "이 필요합니다."
         return label
     }()
     
@@ -76,6 +86,7 @@ class MyPage: UIViewController {
 
     func layout() {
         view.addSubview(topView)
+        topView.addSubview(loginButton)
         topView.addSubview(loginStatusLabel)
         topView.addSubview(profileImage)
         topView.addSubview(myReviewButton)
@@ -94,13 +105,19 @@ class MyPage: UIViewController {
             $0.width.equalTo(Device.screenWidth * 0.9)
             $0.height.equalTo(116)
         }
-        loginStatusLabel.snp.makeConstraints {
-            $0.center.equalToSuperview()
-        }
         profileImage.snp.makeConstraints {
-            $0.centerY.equalTo(loginStatusLabel.snp.centerY)
-            $0.trailing.equalTo(loginStatusLabel.snp.leading).offset(-10)
+            $0.top.equalToSuperview().offset(25)
+            $0.leading.equalToSuperview().offset(44)
         }
+        loginButton.snp.makeConstraints {
+            $0.centerY.equalTo(profileImage.snp.centerY)
+            $0.leading.equalTo(profileImage.snp.trailing).offset(2)
+        }
+        loginStatusLabel.snp.makeConstraints {
+            $0.centerY.equalTo(profileImage.snp.centerY)
+            $0.leading.equalTo(loginButton.snp.trailing).offset(2)
+        }
+ 
         
         myReviewButton.snp.makeConstraints {
             $0.leading.equalToSuperview()
@@ -145,5 +162,10 @@ class MyPage: UIViewController {
             $0.trailing.equalTo(view.snp.trailing).offset(-14)
             $0.width.equalTo(Device.screenWidth * 0.85)
         }
+    }
+    
+    @objc func loginAction() {
+        let login = LoginVC()
+
     }
 }
