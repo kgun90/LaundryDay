@@ -69,15 +69,28 @@ class ViewController: UIViewController, StoreDataDelegate {
     }()
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         layout()
         location()
         
         storeDataManager.delegate = self
-        storeDataManager.requestStoreData()
-//        storeDataManager.requestFSData()
+       
     }
 
+    func requestData() {
+        let geocode = CLGeocoder()
+        geocode.reverseGeocodeLocation(currentLocation) { (placemark, error) in
+            guard
+                let mark = placemark,
+                let location = mark.first?.locality
+            else {
+                return
+            }
+            self.storeDataManager.requestFSData(location)
+                   
+        }
+    }
+    
     func layout() {
         mapView = NMFMapView(frame: view.frame)
         
@@ -125,29 +138,23 @@ class ViewController: UIViewController, StoreDataDelegate {
         }
     }
     
-    func updateStoreData(data: [StoreInformation]) {
+   
+    func getStoreData(data: [StoreData]) {
         for i in 0 ..< data.count {
-            print(i)
+       
             let marker = NMFMarker()
-            let geocoder = CLGeocoder()
-//            let dataSource = NMFInfoWindowDefaultTextSource.data()
-
-            geocoder.geocodeAddressString(data[i].address) { (placemarks, error) in
-                guard
-                    let placemarks = placemarks,
-                    let location = placemarks.first?.location
-                else {
-                    return
-                }
-                marker.position = NMGLatLng(lat: location.coordinate.latitude, lng: location.coordinate.longitude)
-                marker.width = 40
-                marker.height = 40
-                marker.iconImage = NMFOverlayImage(name: "Laundry_marker")
-                marker.mapView = self.mapView
+            let location = data[i].latLon
+           
+            marker.position = NMGLatLng(lat: location.latitude ,lng: location.longitude)
+            marker.width = 40
+            marker.height = 40
+            marker.iconImage = NMFOverlayImage(name: "Laundry_marker")
+            marker.mapView = self.mapView
                 
                 let handler = { (overlay: NMFOverlay) -> Bool in
                     if let _ = overlay as? NMFMarker {
-                        let distance = self.currentLocation.distance(from: location)
+                        let distance = NMGLatLng(from: self.currentLocation.coordinate).distance(to: marker.position)
+                        
                         self.showBtmView(data[i].name, data[i].address, distance, "고유주소", data[i].phoneNum)
                     }
                     return true
@@ -155,11 +162,7 @@ class ViewController: UIViewController, StoreDataDelegate {
                 marker.touchHandler = handler
             }
 
-        }
-    }
-    
-    func getStoreData(data: [StoreData]) {
-//        print(data)
+        
     }
     
     func showBtmView(_ storeName: String, _ storeAddress: String, _ storeDistance: CLLocationDistance, _ serial: String, _ phone: String) {
@@ -208,7 +211,7 @@ extension ViewController: CLLocationManagerDelegate {
             
             self.mapView.moveCamera(NMFCameraUpdate(scrollTo: NMGLatLng(lat: lat, lng: lon)))
             self.currentLocation = location
-            
+            self.requestData()
         }
     }
     

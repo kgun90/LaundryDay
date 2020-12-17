@@ -19,6 +19,8 @@
 		3D4E4F342589F1C800BE9FFF /* BottomCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4E4F332589F1C800BE9FFF /* BottomCustomView.swift */; };
 		3D4E4F37258A0E1200BE9FFF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3D4E4F36258A0E1200BE9FFF /* GoogleService-Info.plist */; };
 		3D4E4F5C258A4E6B00BE9FFF /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4E4F5B258A4E6B00BE9FFF /* LoginVC.swift */; };
+		3DD432C5258BA5370020594E /* JoinVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD432C4258BA5370020594E /* JoinVC.swift */; };
+		3DD432C8258BC0E50020594E /* JoinVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DD432C7258BC0E50020594E /* JoinVC.xib */; };
 		3DEDE1EE25876BEB00D2BB2B /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEDE1ED25876BEB00D2BB2B /* UIView.swift */; };
 		3DEDE1F12587D3F000D2BB2B /* NearStoreListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEDE1F02587D3F000D2BB2B /* NearStoreListVC.swift */; };
 		3DEDE1F42587DB4D00D2BB2B /* StoreListCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEDE1F32587DB4D00D2BB2B /* StoreListCustomView.swift */; };
@@ -45,6 +47,8 @@
 		3D4E4F332589F1C800BE9FFF /* BottomCustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomCustomView.swift; sourceTree = "<group>"; };
 		3D4E4F36258A0E1200BE9FFF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3D4E4F5B258A4E6B00BE9FFF /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		3DD432C4258BA5370020594E /* JoinVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinVC.swift; sourceTree = "<group>"; };
+		3DD432C7258BC0E50020594E /* JoinVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JoinVC.xib; sourceTree = "<group>"; };
 		3DEDE1ED25876BEB00D2BB2B /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		3DEDE1F02587D3F000D2BB2B /* NearStoreListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearStoreListVC.swift; sourceTree = "<group>"; };
 		3DEDE1F32587DB4D00D2BB2B /* StoreListCustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreListCustomView.swift; sourceTree = "<group>"; };
@@ -135,10 +139,10 @@
 		3DF73A5F2584C66C00997842 /* LaundryDay */ = {
 			isa = PBXGroup;
 			children = (
-				3D3469472587467B002D2AB5 /* CommonClass */,
-				3D346945258742F0002D2AB5 /* Extension */,
 				3DF73A602584C66C00997842 /* AppDelegate.swift */,
 				3DF73A622584C66C00997842 /* SceneDelegate.swift */,
+				3D3469472587467B002D2AB5 /* CommonClass */,
+				3D346945258742F0002D2AB5 /* Extension */,
 				3DF73A642584C66C00997842 /* ViewController.swift */,
 				3DF73A662584C66C00997842 /* Main.storyboard */,
 				3DF73A692584C66F00997842 /* Assets.xcassets */,
@@ -150,6 +154,8 @@
 				3D4E4F5A258A4CEA00BE9FFF /* Custom */,
 				3D4E4F36258A0E1200BE9FFF /* GoogleService-Info.plist */,
 				3D4E4F5B258A4E6B00BE9FFF /* LoginVC.swift */,
+				3DD432C4258BA5370020594E /* JoinVC.swift */,
+				3DD432C7258BC0E50020594E /* JoinVC.xib */,
 			);
 			path = LaundryDay;
 			sourceTree = "<group>";
@@ -235,6 +241,7 @@
 				3DEDE1F82587DB5F00D2BB2B /* StoreListCustomView.xib in Resources */,
 				3D4E4F312589F1A600BE9FFF /* BottomCustomView.xib in Resources */,
 				3DF73A6A2584C66F00997842 /* Assets.xcassets in Resources */,
+				3DD432C8258BC0E50020594E /* JoinVC.xib in Resources */,
 				3D34695925875D8F002D2AB5 /* MyPageCustomView.xib in Resources */,
 				3DF73A682584C66C00997842 /* Main.storyboard in Resources */,
 				3D4E4F37258A0E1200BE9FFF /* GoogleService-Info.plist in Resources */,
@@ -307,6 +314,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3DD432C5258BA5370020594E /* JoinVC.swift in Sources */,
 				3DEDE1F12587D3F000D2BB2B /* NearStoreListVC.swift in Sources */,
 				3D34695C25875DA4002D2AB5 /* MyPageCustomView.swift in Sources */,
 				3DF73A652584C66C00997842 /* ViewController.swift in Sources */,
