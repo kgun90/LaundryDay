@@ -21,6 +21,10 @@
 		3D4E4F5C258A4E6B00BE9FFF /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4E4F5B258A4E6B00BE9FFF /* LoginVC.swift */; };
 		3DD432C5258BA5370020594E /* JoinVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD432C4258BA5370020594E /* JoinVC.swift */; };
 		3DD432C8258BC0E50020594E /* JoinVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DD432C7258BC0E50020594E /* JoinVC.xib */; };
+		3DD432CD258C894B0020594E /* StoreDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD432CB258C894B0020594E /* StoreDetailVC.swift */; };
+		3DD432CE258C894B0020594E /* StoreDetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DD432CC258C894B0020594E /* StoreDetailVC.xib */; };
+		3DD432DA258CEA7E0020594E /* ReviewCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD432D8258CEA7E0020594E /* ReviewCustomCell.swift */; };
+		3DD432DB258CEA7E0020594E /* ReviewCustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DD432D9258CEA7E0020594E /* ReviewCustomCell.xib */; };
 		3DEDE1EE25876BEB00D2BB2B /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEDE1ED25876BEB00D2BB2B /* UIView.swift */; };
 		3DEDE1F12587D3F000D2BB2B /* NearStoreListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEDE1F02587D3F000D2BB2B /* NearStoreListVC.swift */; };
 		3DEDE1F42587DB4D00D2BB2B /* StoreListCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEDE1F32587DB4D00D2BB2B /* StoreListCustomView.swift */; };
@@ -49,6 +53,10 @@
 		3D4E4F5B258A4E6B00BE9FFF /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		3DD432C4258BA5370020594E /* JoinVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinVC.swift; sourceTree = "<group>"; };
 		3DD432C7258BC0E50020594E /* JoinVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JoinVC.xib; sourceTree = "<group>"; };
+		3DD432CB258C894B0020594E /* StoreDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreDetailVC.swift; sourceTree = "<group>"; };
+		3DD432CC258C894B0020594E /* StoreDetailVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StoreDetailVC.xib; sourceTree = "<group>"; };
+		3DD432D8258CEA7E0020594E /* ReviewCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCustomCell.swift; sourceTree = "<group>"; };
+		3DD432D9258CEA7E0020594E /* ReviewCustomCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReviewCustomCell.xib; sourceTree = "<group>"; };
 		3DEDE1ED25876BEB00D2BB2B /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		3DEDE1F02587D3F000D2BB2B /* NearStoreListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearStoreListVC.swift; sourceTree = "<group>"; };
 		3DEDE1F32587DB4D00D2BB2B /* StoreListCustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreListCustomView.swift; sourceTree = "<group>"; };
@@ -156,6 +164,10 @@
 				3D4E4F5B258A4E6B00BE9FFF /* LoginVC.swift */,
 				3DD432C4258BA5370020594E /* JoinVC.swift */,
 				3DD432C7258BC0E50020594E /* JoinVC.xib */,
+				3DD432CB258C894B0020594E /* StoreDetailVC.swift */,
+				3DD432CC258C894B0020594E /* StoreDetailVC.xib */,
+				3DD432D8258CEA7E0020594E /* ReviewCustomCell.swift */,
+				3DD432D9258CEA7E0020594E /* ReviewCustomCell.xib */,
 			);
 			path = LaundryDay;
 			sourceTree = "<group>";
@@ -241,6 +253,8 @@
 				3DEDE1F82587DB5F00D2BB2B /* StoreListCustomView.xib in Resources */,
 				3D4E4F312589F1A600BE9FFF /* BottomCustomView.xib in Resources */,
 				3DF73A6A2584C66F00997842 /* Assets.xcassets in Resources */,
+				3DD432CE258C894B0020594E /* StoreDetailVC.xib in Resources */,
+				3DD432DB258CEA7E0020594E /* ReviewCustomCell.xib in Resources */,
 				3DD432C8258BC0E50020594E /* JoinVC.xib in Resources */,
 				3D34695925875D8F002D2AB5 /* MyPageCustomView.xib in Resources */,
 				3DF73A682584C66C00997842 /* Main.storyboard in Resources */,
@@ -324,7 +338,9 @@
 				3DEDE1F42587DB4D00D2BB2B /* StoreListCustomView.swift in Sources */,
 				3DF73A612584C66C00997842 /* AppDelegate.swift in Sources */,
 				3DF73A632584C66C00997842 /* SceneDelegate.swift in Sources */,
+				3DD432DA258CEA7E0020594E /* ReviewCustomCell.swift in Sources */,
 				3D3469532587470D002D2AB5 /* UIFont.swift in Sources */,
+				3DD432CD258C894B0020594E /* StoreDetailVC.swift in Sources */,
 				3D346942258618F9002D2AB5 /* StoreDataManager.swift in Sources */,
 				3D34694D258746CF002D2AB5 /* IndicatorView.swift in Sources */,
 				3D3469492587468A002D2AB5 /* Device.swift in Sources */,

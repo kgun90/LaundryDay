@@ -18,6 +18,7 @@ class BottomCustomView: UIViewController {
     
     @IBOutlet weak var phoneButton: UIButton!
     @IBOutlet weak var mapButton: UIButton!
+    @IBOutlet var storeView: UIView!
     
     var storeName = ""
     var storeAddress = ""
@@ -26,6 +27,7 @@ class BottomCustomView: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        gesture()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -33,6 +35,22 @@ class BottomCustomView: UIViewController {
         storeNameLabel.text = storeName
         storeAddressLabel.text = storeAddress
         storeDistanceLabel.text = storeDistance
+//        let tapAction = UIActionHandler()
+        
     }
+    
+    func gesture() {
+        let singleTapGesture = UITapGestureRecognizer(target: self, action: #selector(tapAction))
+        singleTapGesture.numberOfTouchesRequired = 1
+        storeView.addGestureRecognizer(singleTapGesture)
+        
+    }
+    @objc func tapAction() {
+        let storeDetail = StoreDetailVC()
 
+        storeDetail.modalPresentationStyle = .fullScreen
+    
+        
+        present(storeDetail, animated: true, completion: nil)
+    }
 }

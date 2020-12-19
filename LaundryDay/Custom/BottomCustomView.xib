@@ -19,6 +19,7 @@
                 <outlet property="storeDistanceLabel" destination="KfW-IZ-Pzx" id="AHc-Tp-8IX"/>
                 <outlet property="storeNameLabel" destination="JtE-T5-E0j" id="sqz-0Z-Bon"/>
                 <outlet property="storeRatingLabel" destination="pbn-vy-w5A" id="LCO-FI-oz1"/>
+                <outlet property="storeView" destination="9Ua-Kl-akY" id="Rkb-sc-6qV"/>
                 <outlet property="view" destination="9Ua-Kl-akY" id="es2-4s-LxL"/>
             </connections>
         </placeholder>

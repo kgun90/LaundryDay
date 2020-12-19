@@ -38,6 +38,7 @@ struct StoreDataManager {
                 if let snapshotDocuments = querySnapshot?.documents {
                     for doc in snapshotDocuments {
                         let data = doc.data()
+//                        let id = doc.documentID
                         let newData = StoreData(address: data["address"] as! String,
                                                 name: data["name"] as! String,
                                                 latLon: data["latLng"] as! GeoPoint,
