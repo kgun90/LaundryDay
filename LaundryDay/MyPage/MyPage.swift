@@ -166,13 +166,15 @@ class MyPage: UIViewController {
     
     @objc func loginAction() {
         let loginVC = LoginVC()
-        if let window = UIApplication.shared.windows.first {
-            window.rootViewController = loginVC
-            UIView.transition(with: window,  duration: 0.3, options: .transitionCrossDissolve, animations: nil)
-        } else {
-            loginVC.modalPresentationStyle = .overFullScreen
-            self.present(loginVC, animated: true, completion: nil)
-        }
+        loginVC.modalPresentationStyle = .overFullScreen
+        present(loginVC, animated: true, completion: nil)
+//        if let window = UIApplication.shared.windows.first {
+//            window.rootViewController = loginVC
+//            UIView.transition(with: window,  duration: 0.3, options: .transitionCrossDissolve, animations: nil)
+//        } else {
+//            loginVC.modalPresentationStyle = .overFullScreen
+//            self.present(loginVC, animated: true, completion: nil)
+//        }
 
     }
 }

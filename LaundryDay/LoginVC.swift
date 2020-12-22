@@ -143,20 +143,21 @@ class LoginVC: UIViewController {
     }
     
     @objc func backAction() {
-        let main = ViewController()
-        if let window = UIApplication.shared.windows.first {
-            window.rootViewController = main
-            UIView.transition(with: window, duration: 0.3, options: .transitionCrossDissolve, animations: nil)
-        } else {
-            main.modalPresentationStyle = .overFullScreen
-            self.present(main, animated: true, completion: nil)
-        }
+//        let main = ViewController()
+//        if let window = UIApplication.shared.windows.first {
+//            window.rootViewController = main
+//            UIView.transition(with: window, duration: 0.3, options: .transitionCrossDissolve, animations: nil)
+//        } else {
+//            main.modalPresentationStyle = .overFullScreen
+//            self.present(main, animated: true, completion: nil)
+//        }
+        self.dismiss(animated: true, completion: nil)
 
     }
     
     @objc func joinAction() {
         let join = JoinVC()
-        join.modalPresentationStyle = .fullScreen
+        join.modalPresentationStyle = .overFullScreen
         present(join, animated: true, completion: nil)
     }
 

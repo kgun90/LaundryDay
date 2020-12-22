@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import NMapsMap
+
 
 class BottomCustomView: UIViewController {
     @IBOutlet weak var favoriteButton: UIButton!
@@ -24,6 +26,9 @@ class BottomCustomView: UIViewController {
     var storeAddress = ""
     var storeDistance = ""
     var storePhoneNum = ""
+    
+    var bottomViewData: StoreData?
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,10 +37,11 @@ class BottomCustomView: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        storeNameLabel.text = storeName
-        storeAddressLabel.text = storeAddress
+
         storeDistanceLabel.text = storeDistance
-//        let tapAction = UIActionHandler()
+        storeNameLabel.text = bottomViewData?.name
+        storeAddressLabel.text = bottomViewData?.address
+        storePhoneNum = bottomViewData?.phoneNum ?? ""
         
     }
     
@@ -46,11 +52,10 @@ class BottomCustomView: UIViewController {
         
     }
     @objc func tapAction() {
-        let storeDetail = StoreDetailVC()
-
-        storeDetail.modalPresentationStyle = .fullScreen
-    
-        
-        present(storeDetail, animated: true, completion: nil)
+        let vc = StoreDetailVC()
+        vc.modalPresentationStyle = .overFullScreen
+        vc.storeDetailData = self.bottomViewData
+        present(vc, animated: true, completion: nil)
     }
+
 }

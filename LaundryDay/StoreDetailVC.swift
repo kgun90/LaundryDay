@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import NMapsMap
+
 
 class StoreDetailVC: UIViewController {
     lazy var topView: UIView = {
@@ -100,7 +102,9 @@ class StoreDetailVC: UIViewController {
         let label = UILabel()
         label.font = .BasicFont(.regular, size: 14)
         label.textColor = .black
-        label.text = "StoreAddtess"
+        label.text = "StoreAddress"
+        label.numberOfLines = 0
+        label.textAlignment = .left
         return label
     }()
     
@@ -143,10 +147,55 @@ class StoreDetailVC: UIViewController {
         return tv
     }()
     
+    var storeName = ""
+    var storePhone = ""
+    var storeAddress = ""
+    
+    var nmapView: NMFMapView!
+    var storeDetailData: StoreData?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         addView()
         layout()
+        storeDetailMap(storeDetailData!)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+
+        storeNameLabel.text = storeDetailData?.name
+        storePhoneLabel.text = storeDetailData?.phoneNum
+        addressLabel.text = storeDetailData?.address
+       
+    }
+    
+    @objc private func backAction() {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    func reviewTableSet() {
+        reviewTableView.delegate = self
+        reviewTableView.dataSource = self
+        reviewTableView.separatorColor = .clear
+        reviewTableView.backgroundColor = .mainBackground
+        
+        reviewTableView.register(UINib(nibName: "ReviewCustomCell", bundle: nil), forCellReuseIdentifier: "ReviewCustomCell")
+    }
+    
+    func storeDetailMap(_ data: StoreData) {
+        let marker = NMFMarker()
+        let location = data.latLon
+        
+        marker.position = NMGLatLng(lat: location.latitude, lng: location.longitude)
+        marker.width = 30
+        marker.height = 30
+        marker.iconImage = NMFOverlayImage(name: "Laundry_marker")
+        marker.mapView = self.nmapView
+        nmapView.moveCamera(NMFCameraUpdate(scrollTo: marker.position))
+        
+        nmapView.allowsScrolling = false
+        nmapView.allowsZooming = false
     }
 
     func addView() {
@@ -163,9 +212,12 @@ class StoreDetailVC: UIViewController {
         storeInfoView.addSubview(favoriteButton)
         
         view.addSubview(mapView)
+        nmapView = NMFMapView()
         mapView.addSubview(addressImage)
         mapView.addSubview(addressTitleLabel)
         mapView.addSubview(addressLabel)
+        mapView.addSubview(nmapView)
+        
         view.addSubview(writeReviewButton)
         view.addSubview(reviewTitleLabel)
         view.addSubview(rateAvgLabel)
@@ -175,7 +227,6 @@ class StoreDetailVC: UIViewController {
     
     
     func layout() {
-      
         topView.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.centerX.equalToSuperview()
@@ -199,17 +250,13 @@ class StoreDetailVC: UIViewController {
             $0.height.equalTo(Device.screenHeight * 0.08)
             $0.bottom.equalToSuperview()
         }
+        
         storeInfoLayout()
         mapViewLayout()
         reviewTableSet()
         reviewListLayout()
-        
     }
     
-    @objc private func backAction() {
-        self.dismiss(animated: true, completion: nil)
-    }
-
     func storeInfoLayout() {
         storeInfoView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
@@ -217,20 +264,24 @@ class StoreDetailVC: UIViewController {
             $0.width.equalTo(Device.screenWidth)
             $0.height.equalTo(Device.screenHeight * 0.1)
         }
+        
         storeNameLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(26)
             $0.top.equalToSuperview().offset(17)
         }
+        
         storeTypeLabel.snp.makeConstraints {
             $0.leading.equalTo(storeNameLabel.snp.trailing).offset(2)
             $0.bottom.equalTo(storeNameLabel.snp.bottom)
         }
+        
         phoneImage.snp.makeConstraints {
             $0.leading.equalTo(storeNameLabel.snp.leading)
             $0.top.equalTo(storeNameLabel.snp.bottom).offset(3)
             $0.width.equalTo(20)
             $0.height.equalTo(20)
         }
+        
         storePhoneLabel.snp.makeConstraints {
             $0.leading.equalTo(phoneImage.snp.trailing).offset(3)
             $0.centerY.equalTo(phoneImage.snp.centerY)
@@ -241,55 +292,55 @@ class StoreDetailVC: UIViewController {
             $0.width.equalTo(20)
             $0.height.equalTo(20)
         }
-        
     }
     
     func mapViewLayout() {
-       
-        
         mapView.snp.makeConstraints {
             $0.top.equalTo(storeInfoView.snp.bottom).offset(4)
             $0.centerX.equalToSuperview()
             $0.width.equalToSuperview()
             $0.height.equalTo(Device.screenHeight * 0.3)
         }
+        
         addressImage.snp.makeConstraints {
             $0.top.equalToSuperview().offset(25)
             $0.leading.equalToSuperview().offset(23)
             $0.width.equalTo(21)
             $0.height.equalTo(21)
         }
+        
         addressTitleLabel.snp.makeConstraints {
             $0.centerY.equalTo(addressImage.snp.centerY)
             $0.leading.equalTo(addressImage.snp.trailing).offset(1)
         }
+        
         addressLabel.snp.makeConstraints {
             $0.top.equalTo(addressImage.snp.bottom).offset(2)
             $0.leading.equalTo(addressImage.snp.leading)
+            $0.width.equalTo(Device.screenWidth * 0.8)
         }
         
+        nmapView.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.width.equalToSuperview()
+            $0.bottom.equalToSuperview()
+            $0.top.equalTo(addressLabel.snp.bottom).offset(2)
+        }
     }
-    func reviewTableSet() {
     
-        reviewTableView.delegate = self
-        reviewTableView.dataSource = self
-        reviewTableView.separatorColor = .clear
-        reviewTableView.backgroundColor = .mainBackground
-        
-        reviewTableView.register(UINib(nibName: "ReviewCustomCell", bundle: nil), forCellReuseIdentifier: "ReviewCustomCell")
+
     
-    }
     func reviewListLayout() {
-       
-        
         reviewTitleLabel.snp.makeConstraints {
             $0.top.equalTo(mapView.snp.bottom).offset(14)
             $0.leading.equalToSuperview().offset(25)
         }
+        
         rateAvgLabel.snp.makeConstraints {
             $0.centerY.equalTo(reviewTitleLabel.snp.centerY)
             $0.trailing.equalToSuperview().offset(-24)
         }
+        
         rateAvgImage.snp.makeConstraints {
             $0.centerY.equalTo(reviewTitleLabel.snp.centerY)
             $0.trailing.equalTo(rateAvgLabel.snp.leading).offset(-2)
@@ -300,11 +351,10 @@ class StoreDetailVC: UIViewController {
         reviewTableView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(reviewTitleLabel.snp.bottom).offset(3)
-            $0.width.equalTo(Device.screenWidth * 0.9)
+            $0.width.equalToSuperview()
             $0.height.equalTo(Device.screenHeight * 0.3)
         }
     }
-
 }
 
 extension StoreDetailVC: UITableViewDelegate, UITableViewDataSource {

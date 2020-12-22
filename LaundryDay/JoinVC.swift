@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import DLRadioButton
 
 class JoinVC: UIViewController {
 
@@ -37,10 +38,32 @@ class JoinVC: UIViewController {
         iv.image = UIImage(named: "Logo_Large")
         return iv
     }()
+    @IBOutlet weak var generalUserRadioButton: DLRadioButton!
+    @IBOutlet weak var businessOwnerRadioButton: DLRadioButton!
+    
+    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var passwordCheckTextField: UITextField!
+    @IBOutlet weak var nicknameTextField: UITextField!
+    
+    @IBOutlet var textFields: [UITextField]!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         layout()
+        textFieldLayout()
+        generalUserRadioButton.isSelected = true
+        generalUserRadioButton.otherButtons.append(businessOwnerRadioButton)
+        self.textFields.forEach {
+            $0.delegate = self
+        }
+    }
+    
+    
+
+    @IBAction func typeSelect(_ sender: DLRadioButton) {
+        
     }
     
     func layout() {
@@ -72,7 +95,45 @@ class JoinVC: UIViewController {
             $0.top.equalToSuperview().offset(Device.screenHeight * 0.137)
         }
     }
+    
+    func textFieldLayout() {
+        textFields.forEach {
+            $0.borderStyle = .none
+            let border = CALayer()
+            border.frame = CGRect(x: 0, y: $0.frame.size.height - 1, width: $0.frame.width, height: 1)
+            border.backgroundColor = UIColor.white.cgColor
+            $0.layer.addSublayer(border)
+  
+        }
+    }
+    
     @objc func backAction() {
         dismiss(animated: true, completion: nil)
+    }
+}
+
+extension JoinVC: UITextFieldDelegate {
+    // 사용자가 리턴키 입력시 true/false 를 validate
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        print(textField.text)
+        textFields.forEach {
+            $0.endEditing(true)
+        }
+        return true
+    }
+    // 텍스트 필드에서 사용자의 수정이 완료되었을 때 true/false 를 validate
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        if textField.text != "" { return true }
+        else {
+            textField.placeholder = "올바른 양식으로 입력 바랍니다."
+            return false
+        }
+    }
+    
+    //텍스트 필드 수정을 끝냈을 때
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        textFields.forEach {
+            $0.text = ""
+        }
     }
 }

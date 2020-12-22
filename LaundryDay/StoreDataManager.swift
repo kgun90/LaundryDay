@@ -14,12 +14,7 @@ protocol StoreDataDelegate {
     func getStoreData(data: [StoreData])
 }
 
-struct StoreData {
-    let address: String
-    let name: String
-    let latLon: GeoPoint
-    let phoneNum: String
-}
+
 
 struct StoreDataManager {
     var delegate: StoreDataDelegate?

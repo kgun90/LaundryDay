@@ -19,6 +19,7 @@ private enum TransitionType {
 }
 
 class ViewController: UIViewController, StoreDataDelegate {
+  
     
     private var transitionType: TransitionType = .none
 
@@ -27,6 +28,7 @@ class ViewController: UIViewController, StoreDataDelegate {
     var currentLocation = CLLocation()
     
     var storeDataManager = StoreDataManager()
+    var bottomView = BottomCustomView()
     
     lazy var topView: UIView = {
         let view = UIView()
@@ -67,14 +69,14 @@ class ViewController: UIViewController, StoreDataDelegate {
         
         return seg
     }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         layout()
         location()
-        
+    
         storeDataManager.delegate = self
-       
     }
 
     func requestData() {
@@ -87,9 +89,9 @@ class ViewController: UIViewController, StoreDataDelegate {
                 return
             }
             self.storeDataManager.requestFSData(location)
-                   
         }
     }
+
     
     func layout() {
         mapView = NMFMapView(frame: view.frame)
@@ -154,31 +156,26 @@ class ViewController: UIViewController, StoreDataDelegate {
                 let handler = { (overlay: NMFOverlay) -> Bool in
                     if let _ = overlay as? NMFMarker {
                         let distance = NMGLatLng(from: self.currentLocation.coordinate).distance(to: marker.position)
-                        
-                        self.showBtmView(data[i].name, data[i].address, distance, "고유주소", data[i].phoneNum)
+
+                        self.showBtmView(data[i], distance)
                     }
                     return true
                 }
                 marker.touchHandler = handler
             }
-
-        
     }
     
-    func showBtmView(_ storeName: String, _ storeAddress: String, _ storeDistance: CLLocationDistance, _ serial: String, _ phone: String) {
-        dismiss(animated: true, completion: nil)
-        let smallVC = BottomCustomView()
+    func showBtmView(_ data: StoreData, _ distance: CLLocationDistance) {
+        let btmView = BottomCustomView()
         
-        smallVC.transitioningDelegate = self
-        smallVC.modalPresentationStyle = .custom
+        btmView.transitioningDelegate = self
+        btmView.modalPresentationStyle = .custom
         transitionType = .bottom
         
-        smallVC.storeName = storeName
-        smallVC.storeAddress = storeAddress
-        smallVC.storeDistance = String(format: "%.1fkm", storeDistance/1000.0)
+        btmView.storeDistance = String(format: "%.1fkm", distance/1000.0)
+        btmView.bottomViewData = data
         
-  
-        present(smallVC, animated: true, completion: nil)
+        present(btmView, animated: true, completion: nil)
     }
     
     @objc func myPageAction() {
