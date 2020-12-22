@@ -67,7 +67,17 @@ class StoreDetailVC: UIViewController {
         label.font = .BasicFont(.regular, size: 13)
         label.textColor = .black
         label.text = "00-000-0000"
+        
         return label
+    }()
+    
+    lazy var storePhoneButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("", for: .normal)
+        button.titleLabel?.font = .BasicFont(.regular, size: 13)
+        button.tintColor = .black
+        button.addTarget(self, action: #selector(dialStore), for: .touchUpInside)
+        return button
     }()
     
     lazy var favoriteButton: UIButton = {
@@ -159,13 +169,15 @@ class StoreDetailVC: UIViewController {
         addView()
         layout()
         storeDetailMap(storeDetailData!)
+        addMapViewGesture()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
 
         storeNameLabel.text = storeDetailData?.name
-        storePhoneLabel.text = storeDetailData?.phoneNum
+//        storePhoneLabel.text = storeDetailData?.phoneNum
+        storePhoneButton.setTitle(storeDetailData?.phoneNum, for: .normal)
         addressLabel.text = storeDetailData?.address
        
     }
@@ -184,6 +196,7 @@ class StoreDetailVC: UIViewController {
     }
     
     func storeDetailMap(_ data: StoreData) {
+        
         let marker = NMFMarker()
         let location = data.latLon
         
@@ -197,6 +210,30 @@ class StoreDetailVC: UIViewController {
         nmapView.allowsScrolling = false
         nmapView.allowsZooming = false
     }
+    
+    @objc func dialStore() {
+        if let phoneNumber = storeDetailData?.phoneNum {
+            if let url = URL(string: "tel://" + phoneNumber) {
+                if UIApplication.shared.canOpenURL(url) {
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                }
+            }
+        }
+      
+    }
+    
+    func addMapViewGesture() {
+        let singleTapGesture = UITapGestureRecognizer(target: self, action: #selector(tapAction))
+        singleTapGesture.numberOfTouchesRequired = 1
+        mapView.addGestureRecognizer(singleTapGesture)
+    }
+    
+    @objc func tapAction() {
+        let vc = StoreDetailMapVC()
+        vc.modalPresentationStyle = .overFullScreen
+        vc.storeData = self.storeDetailData
+        present(vc, animated: true, completion: nil)
+    }
 
     func addView() {
         view.backgroundColor = .mainBackground
@@ -208,7 +245,8 @@ class StoreDetailVC: UIViewController {
         storeInfoView.addSubview(storeNameLabel)
         storeInfoView.addSubview(storeTypeLabel)
         storeInfoView.addSubview(phoneImage)
-        storeInfoView.addSubview(storePhoneLabel)
+        storeInfoView.addSubview(storePhoneButton)
+//        storeInfoView.addSubview(storePhoneLabel)
         storeInfoView.addSubview(favoriteButton)
         
         view.addSubview(mapView)
@@ -282,10 +320,16 @@ class StoreDetailVC: UIViewController {
             $0.height.equalTo(20)
         }
         
-        storePhoneLabel.snp.makeConstraints {
+        storePhoneButton.snp.makeConstraints {
             $0.leading.equalTo(phoneImage.snp.trailing).offset(3)
             $0.centerY.equalTo(phoneImage.snp.centerY)
         }
+        
+//        storePhoneLabel.snp.makeConstraints {
+//            $0.leading.equalTo(storePhoneButton.snp.trailing).offset(3)
+//            $0.centerY.equalTo(storePhoneButton.snp.centerY)
+//        }
+        
         favoriteButton.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.trailing.equalToSuperview().offset(38)

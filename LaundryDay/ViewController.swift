@@ -46,7 +46,7 @@ class ViewController: UIViewController, StoreDataDelegate {
     lazy var listButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "List"), for: .normal)
-        button.addTarget(self, action: #selector(listAction), for: .touchUpInside)
+        button.addTarget(self, action: #selector(nearStoreListAction), for: .touchUpInside)
         return button
     }()
     
@@ -69,6 +69,8 @@ class ViewController: UIViewController, StoreDataDelegate {
         
         return seg
     }()
+    
+    var storeData: [StoreData]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -142,6 +144,7 @@ class ViewController: UIViewController, StoreDataDelegate {
     
    
     func getStoreData(data: [StoreData]) {
+        self.storeData = data
         for i in 0 ..< data.count {
        
             let marker = NMFMarker()
@@ -188,12 +191,13 @@ class ViewController: UIViewController, StoreDataDelegate {
         present(myPage, animated: true, completion: nil)
     }
     
-    @objc func listAction() {
+    @objc func nearStoreListAction() {
         let listPage = NearStoreListVC()
         
         listPage.transitioningDelegate = self
         listPage.modalPresentationStyle = .custom
         transitionType = .slide
+        listPage.storeData = self.storeData
         
         present(listPage, animated: true, completion: nil)
     }

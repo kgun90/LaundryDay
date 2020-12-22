@@ -26,6 +26,9 @@
 		3DD432CE258C894B0020594E /* StoreDetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DD432CC258C894B0020594E /* StoreDetailVC.xib */; };
 		3DD432DA258CEA7E0020594E /* ReviewCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD432D8258CEA7E0020594E /* ReviewCustomCell.swift */; };
 		3DD432DB258CEA7E0020594E /* ReviewCustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DD432D9258CEA7E0020594E /* ReviewCustomCell.xib */; };
+		3DD8D4E425922E4700598FDA /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD8D4E325922E4700598FDA /* String.swift */; };
+		3DD8D4E725923A6F00598FDA /* StoreDetailMapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD8D4E625923A6F00598FDA /* StoreDetailMapVC.swift */; };
+		3DD8D50C25926CD200598FDA /* EmailLoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD8D50B25926CD200598FDA /* EmailLoginVC.swift */; };
 		3DEDE1EE25876BEB00D2BB2B /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEDE1ED25876BEB00D2BB2B /* UIView.swift */; };
 		3DEDE1F12587D3F000D2BB2B /* NearStoreListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEDE1F02587D3F000D2BB2B /* NearStoreListVC.swift */; };
 		3DEDE1F42587DB4D00D2BB2B /* StoreListCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEDE1F32587DB4D00D2BB2B /* StoreListCustomView.swift */; };
@@ -59,6 +62,9 @@
 		3DD432CC258C894B0020594E /* StoreDetailVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StoreDetailVC.xib; sourceTree = "<group>"; };
 		3DD432D8258CEA7E0020594E /* ReviewCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCustomCell.swift; sourceTree = "<group>"; };
 		3DD432D9258CEA7E0020594E /* ReviewCustomCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReviewCustomCell.xib; sourceTree = "<group>"; };
+		3DD8D4E325922E4700598FDA /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		3DD8D4E625923A6F00598FDA /* StoreDetailMapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreDetailMapVC.swift; sourceTree = "<group>"; };
+		3DD8D50B25926CD200598FDA /* EmailLoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailLoginVC.swift; sourceTree = "<group>"; };
 		3DEDE1ED25876BEB00D2BB2B /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		3DEDE1F02587D3F000D2BB2B /* NearStoreListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearStoreListVC.swift; sourceTree = "<group>"; };
 		3DEDE1F32587DB4D00D2BB2B /* StoreListCustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreListCustomView.swift; sourceTree = "<group>"; };
@@ -94,6 +100,7 @@
 				3D34694F258746F4002D2AB5 /* UIColor.swift */,
 				3D3469522587470D002D2AB5 /* UIFont.swift */,
 				3DEDE1ED25876BEB00D2BB2B /* UIView.swift */,
+				3DD8D4E325922E4700598FDA /* String.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -158,19 +165,21 @@
 				3DF73A662584C66C00997842 /* Main.storyboard */,
 				3DF73A692584C66F00997842 /* Assets.xcassets */,
 				3DF73A6B2584C66F00997842 /* LaunchScreen.storyboard */,
-				3DF73A6E2584C66F00997842 /* Info.plist */,
 				3D346941258618F9002D2AB5 /* StoreDataManager.swift */,
 				3DEDE1F02587D3F000D2BB2B /* NearStoreListVC.swift */,
 				3D34695F25875DC6002D2AB5 /* MyPage */,
 				3D4E4F5A258A4CEA00BE9FFF /* Custom */,
-				3D4E4F36258A0E1200BE9FFF /* GoogleService-Info.plist */,
 				3D4E4F5B258A4E6B00BE9FFF /* LoginVC.swift */,
+				3DD8D50B25926CD200598FDA /* EmailLoginVC.swift */,
 				3DD432C4258BA5370020594E /* JoinVC.swift */,
 				3DD432C7258BC0E50020594E /* JoinVC.xib */,
 				3DD432CB258C894B0020594E /* StoreDetailVC.swift */,
 				3DD432CC258C894B0020594E /* StoreDetailVC.xib */,
+				3DD8D4E625923A6F00598FDA /* StoreDetailMapVC.swift */,
 				3DD432D8258CEA7E0020594E /* ReviewCustomCell.swift */,
 				3DD432D9258CEA7E0020594E /* ReviewCustomCell.xib */,
+				3DF73A6E2584C66F00997842 /* Info.plist */,
+				3D4E4F36258A0E1200BE9FFF /* GoogleService-Info.plist */,
 			);
 			path = LaundryDay;
 			sourceTree = "<group>";
@@ -333,10 +342,12 @@
 			files = (
 				3DD432C5258BA5370020594E /* JoinVC.swift in Sources */,
 				3DEDE1F12587D3F000D2BB2B /* NearStoreListVC.swift in Sources */,
+				3DD8D4E425922E4700598FDA /* String.swift in Sources */,
 				3D34695C25875DA4002D2AB5 /* MyPageCustomView.swift in Sources */,
 				3DF73A652584C66C00997842 /* ViewController.swift in Sources */,
 				3DEDE1EE25876BEB00D2BB2B /* UIView.swift in Sources */,
 				3D4E4F342589F1C800BE9FFF /* BottomCustomView.swift in Sources */,
+				3DD8D4E725923A6F00598FDA /* StoreDetailMapVC.swift in Sources */,
 				3D346950258746F4002D2AB5 /* UIColor.swift in Sources */,
 				3DEDE1F42587DB4D00D2BB2B /* StoreListCustomView.swift in Sources */,
 				3DF73A612584C66C00997842 /* AppDelegate.swift in Sources */,
@@ -344,6 +355,7 @@
 				3DD432DA258CEA7E0020594E /* ReviewCustomCell.swift in Sources */,
 				3D3469532587470D002D2AB5 /* UIFont.swift in Sources */,
 				3DA668792591A0F1002ED446 /* StoreData.swift in Sources */,
+				3DD8D50C25926CD200598FDA /* EmailLoginVC.swift in Sources */,
 				3DD432CD258C894B0020594E /* StoreDetailVC.swift in Sources */,
 				3D346942258618F9002D2AB5 /* StoreDataManager.swift in Sources */,
 				3D34694D258746CF002D2AB5 /* IndicatorView.swift in Sources */,

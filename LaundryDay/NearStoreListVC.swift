@@ -44,7 +44,7 @@ class NearStoreListVC: UIViewController {
         return tv
     }()
     
-    
+    var storeData: [StoreData]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,7 +57,8 @@ class NearStoreListVC: UIViewController {
         storeTableView.dataSource = self
         storeTableView.separatorColor = .clear
         storeTableView.backgroundColor = .mainBackground
-        
+
+
         storeTableView.register(UINib(nibName: "StoreListCustomView", bundle: nil), forCellReuseIdentifier: "StoreListCustomView")
     }
     
@@ -91,7 +92,7 @@ class NearStoreListVC: UIViewController {
         storeTableView.snp.makeConstraints {
             $0.top.equalTo(topView.snp.bottom).offset(10)
             $0.centerX.equalToSuperview()
-            $0.width.equalTo(Device.screenWidth)
+            $0.width.equalTo(Device.screenWidth * 0.95)
             $0.bottom.equalToSuperview()
         }
         
@@ -104,14 +105,55 @@ class NearStoreListVC: UIViewController {
 }
 
 extension NearStoreListVC: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+    // 섹션의 개수를 데이터의 개수만큼 생성하고, 각 섹션의 로우는 1개로 정한다.
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return storeData?.count ?? 0
     }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "StoreListCustomView", for: indexPath as IndexPath) as! StoreListCustomView
     
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    // 각 섹션에 해당하는 데이터를 넣으므로 indexPath.row 가 아니고 .section이 된다.
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = self.storeTableView.dequeueReusableCell(withIdentifier: "StoreListCustomView", for: indexPath as IndexPath) as! StoreListCustomView
+        cell.storeNameLabel.text = storeData![indexPath.section].name
+        cell.storeAddressLabel.text = storeData![indexPath.section].address
+
+        // 셀 선택시 회색으로 바뀌지 않게 설정
+        let backgroundView = UIView()
+        backgroundView.backgroundColor = .clear
+        cell.selectedBackgroundView = backgroundView
+        
+        // Cell Shadow 작업중..
+        cell.layer.cornerRadius = 10
+        cell.layer.masksToBounds = false
+        let shadowPath2 = UIBezierPath(rect: CGRect(x: 0, y: 0, width: cell.bounds.width + 1, height: cell.bounds.height + 1))
+        cell.layer.shadowColor = UIColor.gray.cgColor
+        cell.layer.shadowOffset = CGSize(width: CGFloat(1.0), height: CGFloat(1.0))
+        cell.layer.shadowOpacity = 1.0
+        cell.layer.shadowRadius = 10
+        cell.layer.shadowPath = shadowPath2.cgPath
+
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = StoreDetailVC()
+        
+        vc.modalPresentationStyle = .overFullScreen
+        vc.storeDetailData = self.storeData![indexPath.section]
+        present(vc, animated: true, completion: nil)
+        
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 10
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView()
+        headerView.backgroundColor = .clear
+        return headerView
     }
 
 
