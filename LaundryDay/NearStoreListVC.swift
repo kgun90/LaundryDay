@@ -127,12 +127,18 @@ extension NearStoreListVC: UITableViewDelegate, UITableViewDataSource {
         // Cell Shadow 작업중..
         cell.layer.cornerRadius = 10
         cell.layer.masksToBounds = false
-        let shadowPath2 = UIBezierPath(rect: CGRect(x: 0, y: 0, width: cell.bounds.width + 1, height: cell.bounds.height + 1))
-        cell.layer.shadowColor = UIColor.gray.cgColor
-        cell.layer.shadowOffset = CGSize(width: CGFloat(1.0), height: CGFloat(1.0))
-        cell.layer.shadowOpacity = 1.0
-        cell.layer.shadowRadius = 10
+        let shadowPath2 = UIBezierPath(rect: CGRect(x: 0, y: 0, width: cell.bounds.width, height: cell.bounds.height-3))
+        // 그림자 시작위치
+        cell.layer.shadowOffset = CGSize(width: 0, height: 1)
+        // 그림자 크기와 방향
         cell.layer.shadowPath = shadowPath2.cgPath
+        // 그림자 색상
+        cell.layer.shadowColor = UIColor.gray.cgColor
+        // 그림자 투명도
+        cell.layer.shadowOpacity = 0.5
+        // 그림자 radius
+        cell.layer.shadowRadius = 10
+
 
         return cell
     }

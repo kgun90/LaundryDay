@@ -59,6 +59,7 @@ class LoginVC: UIViewController {
         button.titleLabel?.font = .BasicFont(.regular, size: 16)
         button.backgroundColor = UIColor(hex: 0x004aad)
         button.layer.cornerRadius = Device.screenHeight * 0.03
+        button.addTarget(self, action: #selector(emailLoginAction), for: .touchUpInside)
         return button
     }()
     
@@ -153,6 +154,11 @@ class LoginVC: UIViewController {
 //        }
         self.dismiss(animated: true, completion: nil)
 
+    }
+    @objc func emailLoginAction() {
+        let vc = EmailLoginVC()
+        vc.modalPresentationStyle = .overFullScreen
+        present(vc, animated: true, completion: nil)
     }
     
     @objc func joinAction() {

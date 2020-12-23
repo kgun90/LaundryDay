@@ -21,6 +21,13 @@ class JoinVC: UIViewController{
     lazy var topView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
+        view.layer.masksToBounds = false
+        view.layer.shadowPath = UIBezierPath(rect: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height)).cgPath
+        view.layer.shadowOffset = CGSize(width: 0, height: 10)
+        view.layer.shadowColor = UIColor.black.cgColor
+
+        view.layer.shadowOpacity = 0.5
+        view.layer.shadowRadius = 10
         return view
     }()
     
@@ -133,8 +140,6 @@ class JoinVC: UIViewController{
         }
     }
     
-   
-    
     func layout() {
         view.backgroundColor = .white
         view.addSubview(topView)
@@ -162,7 +167,7 @@ class JoinVC: UIViewController{
         
         logoImage.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalToSuperview().offset(Device.screenHeight * 0.137)
+            $0.top.equalToSuperview().offset(Device.screenHeight * 0.12)
         }
         
         joinButton.snp.makeConstraints {
@@ -183,8 +188,6 @@ class JoinVC: UIViewController{
             $0.layer.addSublayer(border)
             $0.delegate = self
         }
-
-        
     }
     
     @objc func backAction() {
