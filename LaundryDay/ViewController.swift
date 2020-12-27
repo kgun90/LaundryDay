@@ -192,11 +192,12 @@ class ViewController: UIViewController, StoreDataDelegate {
     }
     
     @objc func nearStoreListAction() {
-        let listPage = NearStoreListVC()
+        let listPage = StoreListVC()
         
         listPage.transitioningDelegate = self
         listPage.modalPresentationStyle = .custom
         transitionType = .slide
+        listPage.contentMode = .NearStore
         listPage.storeData = self.storeData
         
         present(listPage, animated: true, completion: nil)

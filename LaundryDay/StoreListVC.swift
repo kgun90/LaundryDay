@@ -6,8 +6,15 @@
 //
 
 import UIKit
+import RealmSwift
 
-class NearStoreListVC: UIViewController {
+enum ListMode{
+    case NearStore
+    case RecentViewedStore
+    case FavoriteStore
+}
+
+class StoreListVC: UIViewController {
     lazy var topView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
@@ -32,7 +39,7 @@ class NearStoreListVC: UIViewController {
     
     lazy var topViewLabel: UILabel = {
         let label = UILabel()
-        label.text = "내근처 세탁소"
+        label.text = "ViewTitleLabel"
         label.textColor = .titleBlue
         label.font = .BasicFont(.semiBold, size: 18)
         return label
@@ -45,11 +52,32 @@ class NearStoreListVC: UIViewController {
     }()
     
     var storeData: [StoreData]?
+    var contentMode: ListMode = .NearStore
+    let realm = try! Realm()
+    var recentViewedData: Results<RecentViewedData>!
+    
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableViewSet()
         layout()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        switch contentMode {
+        case .NearStore:
+            topViewLabel.text = "내근처 세탁소"
+        case .FavoriteStore:
+            topViewLabel.text = "찜한 세탁소"
+        case .RecentViewedStore:
+            topViewLabel.text = "최근 본 세탁소"
+        }
+    }
+    
+    func listDataSet() {
+        recentViewedData = realm.objects(RecentViewedData.self).sorted(byKeyPath: "date", ascending: true)
     }
     
     func tableViewSet() {
@@ -104,10 +132,18 @@ class NearStoreListVC: UIViewController {
     
 }
 
-extension NearStoreListVC: UITableViewDelegate, UITableViewDataSource {
+extension StoreListVC: UITableViewDelegate, UITableViewDataSource {
     // 섹션의 개수를 데이터의 개수만큼 생성하고, 각 섹션의 로우는 1개로 정한다.
     func numberOfSections(in tableView: UITableView) -> Int {
-        return storeData?.count ?? 0
+        switch contentMode {
+        case .NearStore:
+            return storeData?.count ?? 0
+        case .RecentViewedStore:
+            return recentViewedData.count
+        default:
+            return storeData?.count ?? 0
+        }
+       
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -116,8 +152,17 @@ extension NearStoreListVC: UITableViewDelegate, UITableViewDataSource {
     // 각 섹션에 해당하는 데이터를 넣으므로 indexPath.row 가 아니고 .section이 된다.
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.storeTableView.dequeueReusableCell(withIdentifier: "StoreListCustomView", for: indexPath as IndexPath) as! StoreListCustomView
-        cell.storeNameLabel.text = storeData![indexPath.section].name
-        cell.storeAddressLabel.text = storeData![indexPath.section].address
+        
+        switch contentMode {
+        case .NearStore:
+            cell.storeNameLabel.text = storeData![indexPath.section].name
+            cell.storeAddressLabel.text = storeData![indexPath.section].address
+
+        default:
+            cell.storeNameLabel.text = storeData![indexPath.section].name
+            cell.storeAddressLabel.text = storeData![indexPath.section].address
+        }
+      
 
         // 셀 선택시 회색으로 바뀌지 않게 설정
         let backgroundView = UIView()

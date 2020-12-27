@@ -9,19 +9,17 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import Firebase
+import RealmSwift
 
 protocol StoreDataDelegate {
     func getStoreData(data: [StoreData])
 }
 
-
-
 struct StoreDataManager {
     var delegate: StoreDataDelegate?
     
     let fs = Firestore.firestore()
-    
-   
+    let realm = try! Realm()
     
     func requestFSData(_ currentAddress: String) {
         fs.collection("LAUNDRY").whereField("address_array", arrayContains: currentAddress).addSnapshotListener { (querySnapshot, error) in
@@ -33,17 +31,17 @@ struct StoreDataManager {
                 if let snapshotDocuments = querySnapshot?.documents {
                     for doc in snapshotDocuments {
                         let data = doc.data()
-//                        let id = doc.documentID
+                        let storeID = doc.documentID
                         let newData = StoreData(address: data["address"] as! String,
                                                 name: data["name"] as! String,
                                                 latLon: data["latLng"] as! GeoPoint,
-                                                phoneNum: data["number"] as! String)
+                                                phoneNum: data["number"] as! String,
+                                                type: data["type"] as! String,
+                                                id: storeID)
                         storeInfo.append(newData)
                         self.delegate?.getStoreData(data: storeInfo)
-//                        if let name = data["name"] as? String {
-//
-//                        }
                     }
+                    
                 }
             }
         }

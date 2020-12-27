@@ -60,8 +60,8 @@ class MyPage: UIViewController {
     lazy var recentViewedStore: UIButton = {
         let button = UIButton()
         button.setTitle("최근 본 세탁소", for: .normal)
-
         button.setTitleColor(.titleBlue, for: .normal)
+        button.addTarget(self, action: #selector(recentViewedButtonAction), for: .touchUpInside)
         return button
     }()
     
@@ -69,6 +69,7 @@ class MyPage: UIViewController {
         let button = UIButton()
         button.setTitle("찜한 세탁소", for: .normal)
         button.setTitleColor(.titleBlue, for: .normal)
+        button.addTarget(self, action: #selector(favoriteButtonAction), for: .touchUpInside)
         return button
     }()
     
@@ -168,13 +169,20 @@ class MyPage: UIViewController {
         let loginVC = LoginVC()
         loginVC.modalPresentationStyle = .overFullScreen
         present(loginVC, animated: true, completion: nil)
-//        if let window = UIApplication.shared.windows.first {
-//            window.rootViewController = loginVC
-//            UIView.transition(with: window,  duration: 0.3, options: .transitionCrossDissolve, animations: nil)
-//        } else {
-//            loginVC.modalPresentationStyle = .overFullScreen
-//            self.present(loginVC, animated: true, completion: nil)
-//        }
-
+    }
+    
+    @objc func recentViewedButtonAction() {
+        let vc = StoreListVC()
+        vc.contentMode = .RecentViewedStore
+        vc.modalPresentationStyle = .overFullScreen
+        present(vc, animated: true, completion: nil)
+        
+    }
+    
+    @objc func favoriteButtonAction() {
+        let vc = StoreListVC()
+        vc.contentMode = .FavoriteStore
+        vc.modalPresentationStyle = .overFullScreen
+        present(vc, animated: true, completion: nil)
     }
 }

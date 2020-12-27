@@ -55,7 +55,9 @@ class BottomCustomView: UIViewController {
         let vc = StoreDetailVC()
         vc.modalPresentationStyle = .overFullScreen
         vc.storeDetailData = self.bottomViewData
+ 
         present(vc, animated: true, completion: nil)
     }
 
+    
 }
