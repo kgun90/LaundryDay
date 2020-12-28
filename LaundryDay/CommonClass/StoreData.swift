@@ -7,7 +7,6 @@
 
 import Foundation
 import Firebase
-import RealmSwift
 
 //public protocol Persistable {
 //    associatedtype ManagedObject: RealmSwift.Object

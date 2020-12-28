@@ -7,7 +7,7 @@
 
 import UIKit
 import NMapsMap
-import RealmSwift
+//import RealmSwift
 
 
 class StoreDetailVC: UIViewController {
@@ -165,7 +165,7 @@ class StoreDetailVC: UIViewController {
     var nmapView: NMFMapView!
     var storeDetailData: StoreData?
     var updateID: Int?
-    let realm = try! Realm()
+//    let realm = try! Realm()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -187,14 +187,14 @@ class StoreDetailVC: UIViewController {
     }
     
     func addRecentData() {
-        let storeData = RecentViewedData()
-
-        storeData.id = storeDetailData!.id
-        storeData.date = Date()
- 
-        try! realm.write{
-            realm.add(storeData, update: .modified)
-        }
+//        let storeData = RecentViewedData()
+//
+//        storeData.id = storeDetailData!.id
+//        storeData.date = Date()
+// 
+//        try! realm.write{
+//            realm.add(storeData, update: .modified)
+//        }
     }
     
     func reviewTableSet() {

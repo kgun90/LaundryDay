@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import RealmSwift
+//import RealmSwift
 
 enum ListMode{
     case NearStore
@@ -53,8 +53,8 @@ class StoreListVC: UIViewController {
     
     var storeData: [StoreData]?
     var contentMode: ListMode = .NearStore
-    let realm = try! Realm()
-    var recentViewedData: Results<RecentViewedData>!
+//    let realm = try! Realm()
+//    var recentViewedData: Results<RecentViewedData>!
     
 
     
@@ -77,7 +77,7 @@ class StoreListVC: UIViewController {
     }
     
     func listDataSet() {
-        recentViewedData = realm.objects(RecentViewedData.self).sorted(byKeyPath: "date", ascending: true)
+//        recentViewedData = realm.objects(RecentViewedData.self).sorted(byKeyPath: "date", ascending: true)
     }
     
     func tableViewSet() {
@@ -138,8 +138,8 @@ extension StoreListVC: UITableViewDelegate, UITableViewDataSource {
         switch contentMode {
         case .NearStore:
             return storeData?.count ?? 0
-        case .RecentViewedStore:
-            return recentViewedData.count
+//        case .RecentViewedStore:
+//            return recentViewedData.count
         default:
             return storeData?.count ?? 0
         }

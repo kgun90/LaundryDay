@@ -16,7 +16,7 @@ class LoginVC: UIViewController {
         
         return button
     }()
-
+    
     lazy var logoImage: UIImageView = {
         let iv = UIImageView()
         iv.image = UIImage(named: "Logo_Large")

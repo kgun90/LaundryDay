@@ -41,7 +41,7 @@
 		3DF73A682584C66C00997842 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DF73A662584C66C00997842 /* Main.storyboard */; };
 		3DF73A6A2584C66F00997842 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3DF73A692584C66F00997842 /* Assets.xcassets */; };
 		3DF73A6D2584C66F00997842 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DF73A6B2584C66F00997842 /* LaunchScreen.storyboard */; };
-		7280C05FCB80748505D8D1D8 /* Pods_LaundryDay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8863594A827B14F24F61827B /* Pods_LaundryDay.framework */; };
+		EB1C515A259A0C8B004BD6A9 /* Pods_LaundryDay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8863594A827B14F24F61827B /* Pods_LaundryDay.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -91,7 +91,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7280C05FCB80748505D8D1D8 /* Pods_LaundryDay.framework in Frameworks */,
+				EB1C515A259A0C8B004BD6A9 /* Pods_LaundryDay.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -440,6 +440,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				EXCLUDED_ARCHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -527,11 +528,13 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = RT3T8DHJJ3;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				INFOPLIST_FILE = LaundryDay/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kang.LaundryDay;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -552,6 +555,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kang.LaundryDay;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

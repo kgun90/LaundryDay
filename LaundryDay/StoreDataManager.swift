@@ -9,7 +9,6 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import Firebase
-import RealmSwift
 
 protocol StoreDataDelegate {
     func getStoreData(data: [StoreData])
@@ -19,7 +18,6 @@ struct StoreDataManager {
     var delegate: StoreDataDelegate?
     
     let fs = Firestore.firestore()
-    let realm = try! Realm()
     
     func requestFSData(_ currentAddress: String) {
         fs.collection("LAUNDRY").whereField("address_array", arrayContains: currentAddress).addSnapshotListener { (querySnapshot, error) in
