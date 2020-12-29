@@ -22,14 +22,7 @@ private enum TransitionType {
 class ViewController: UIViewController, StoreDataDelegate {
   
     
-    private var transitionType: TransitionType = .none
-
-    var mapView: NMFMapView!
-    let locationManager = CLLocationManager()
-    var currentLocation = CLLocation()
-    
-    var storeDataManager = StoreDataManager()
-    var bottomView = BottomCustomView()
+  
     
     lazy var topView: UIView = {
         let view = UIView()
@@ -71,6 +64,14 @@ class ViewController: UIViewController, StoreDataDelegate {
         return seg
     }()
     
+    private var transitionType: TransitionType = .none
+
+    var mapView: NMFMapView!
+    let locationManager = CLLocationManager()
+    var currentLocation = CLLocation()
+    
+    var storeDataManager = StoreDataManager()
+    var bottomView = BottomCustomView()
     var storeData: [StoreData]?
     
     override func viewDidLoad() {
@@ -91,6 +92,7 @@ class ViewController: UIViewController, StoreDataDelegate {
             else {
                 return
             }
+          
             self.storeDataManager.requestFSData(location)
         }
     }
@@ -147,7 +149,7 @@ class ViewController: UIViewController, StoreDataDelegate {
     func getStoreData(data: [StoreData]) {
         self.storeData = data
         for i in 0 ..< data.count {
-       
+            
             let marker = NMFMarker()
             let location = data[i].latLon
            
@@ -156,16 +158,16 @@ class ViewController: UIViewController, StoreDataDelegate {
             marker.height = 40
             marker.iconImage = NMFOverlayImage(name: "Laundry_marker")
             marker.mapView = self.mapView
-                
-                let handler = { (overlay: NMFOverlay) -> Bool in
-                    if let _ = overlay as? NMFMarker {
-                        let distance = NMGLatLng(from: self.currentLocation.coordinate).distance(to: marker.position)
+    
+            let handler = { (overlay: NMFOverlay) -> Bool in
+                if let _ = overlay as? NMFMarker {
+                    let distance = NMGLatLng(from: self.currentLocation.coordinate).distance(to: marker.position)
 
-                        self.showBtmView(data[i], distance)
-                    }
-                    return true
+                    self.showBtmView(data[i], distance)
                 }
-                marker.touchHandler = handler
+                return true
+            }
+            marker.touchHandler = handler
             }
     }
     

@@ -6,8 +6,10 @@
 //
 
 import UIKit
+import RealmSwift
 
-class MyPage: UIViewController {
+class MyPage: UIViewController, GetStoreDataManagerDelegate {
+
     lazy var topView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
@@ -79,10 +81,45 @@ class MyPage: UIViewController {
     let favorite2 = MyPageCustomView()
     let favorite3 = MyPageCustomView()
     
+    var storeData: [StoreData] = []
+    var getStoreDetailManager = GetStoreDataManager()
+    var realm = try! Realm()
+    var recentViewedData: Results<RecentViewedData>!
+    var recentViewed: StoreData?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .mainBackground
+        getStoreDetailManager.delegate = self
+        listDataSet()
+        
         layout()
+       
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        
+    }
+    func listDataSet() {
+        recentViewedData = realm.objects(RecentViewedData.self).sorted(byKeyPath: "date", ascending: true)
+        DispatchQueue.main.async {
+            for i in 0 ..< self.recentViewedData.count {
+                self.getStoreDetailManager.getStoreDataByID(self.recentViewedData[i].id)
+            }
+        }
+      
+        
+    }
+    
+    func getStoreData(_ data: StoreData) {
+        storeData.append(data)
+        customViewDataSet()
+    }
+    
+    func customViewDataSet() {
+
+            self.recentViewCell.storeNameLabel.text = storeData.first!.name
+            self.recentViewCell.storeAddressLabel.text = storeData.first!.address
+  
     }
 
     func layout() {
@@ -173,8 +210,11 @@ class MyPage: UIViewController {
     
     @objc func recentViewedButtonAction() {
         let vc = StoreListVC()
-        vc.contentMode = .RecentViewedStore
+        
         vc.modalPresentationStyle = .overFullScreen
+        vc.contentMode = .RecentViewedStore
+        vc.storeData = self.storeData
+     
         present(vc, animated: true, completion: nil)
         
     }

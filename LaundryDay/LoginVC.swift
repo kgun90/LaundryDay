@@ -62,7 +62,7 @@ class LoginVC: UIViewController {
         button.addTarget(self, action: #selector(emailLoginAction), for: .touchUpInside)
         return button
     }()
-    
+
     lazy var joinLable: UILabel = {
         let label = UILabel()
         label.text = "런드리데이에 처음 오셨나요?"
@@ -85,7 +85,7 @@ class LoginVC: UIViewController {
         layout()
      
     }
-    
+
     func layout() {
         view.backgroundColor = .white
         view.addSubview(backButton)

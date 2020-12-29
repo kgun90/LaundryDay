@@ -6,8 +6,6 @@
 //
 
 import UIKit
-import Alamofire
-import SwiftyJSON
 import Firebase
 
 protocol StoreDataDelegate {

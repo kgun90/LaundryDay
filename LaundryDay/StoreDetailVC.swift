@@ -7,10 +7,11 @@
 
 import UIKit
 import NMapsMap
-//import RealmSwift
+import RealmSwift
 
 
 class StoreDetailVC: UIViewController {
+ 
     lazy var topView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
@@ -165,7 +166,7 @@ class StoreDetailVC: UIViewController {
     var nmapView: NMFMapView!
     var storeDetailData: StoreData?
     var updateID: Int?
-//    let realm = try! Realm()
+    let realm = try! Realm()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -185,16 +186,22 @@ class StoreDetailVC: UIViewController {
         addRecentData()
 
     }
+    override func viewWillDisappear(_ animated: Bool) {
+        let recentViewedData = realm.objects(RecentViewedData.self).sorted(byKeyPath: "date", ascending: true)
+        recentViewedData.forEach {
+            print($0.id)
+        }
+    }
     
     func addRecentData() {
-//        let storeData = RecentViewedData()
-//
-//        storeData.id = storeDetailData!.id
-//        storeData.date = Date()
-// 
-//        try! realm.write{
-//            realm.add(storeData, update: .modified)
-//        }
+        let storeData = RecentViewedData()
+
+        storeData.id = storeDetailData!.id
+        storeData.date = Date()
+ 
+        try! realm.write{
+            realm.add(storeData, update: .modified)
+        }
     }
     
     func reviewTableSet() {
@@ -234,7 +241,6 @@ class StoreDetailVC: UIViewController {
                 }
             }
         }
-      
     }
     
     func addMapViewGesture() {

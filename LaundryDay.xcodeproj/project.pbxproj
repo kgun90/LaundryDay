@@ -42,6 +42,7 @@
 		3DF73A6A2584C66F00997842 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3DF73A692584C66F00997842 /* Assets.xcassets */; };
 		3DF73A6D2584C66F00997842 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DF73A6B2584C66F00997842 /* LaunchScreen.storyboard */; };
 		EB1C515A259A0C8B004BD6A9 /* Pods_LaundryDay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8863594A827B14F24F61827B /* Pods_LaundryDay.framework */; };
+		EB554B2E259A3EB3006571A3 /* GetStoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB554B2D259A3EB3006571A3 /* GetStoreDataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -83,6 +84,7 @@
 		3DF73A6E2584C66F00997842 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8863594A827B14F24F61827B /* Pods_LaundryDay.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LaundryDay.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D48C39F6493E23CC9D943F5A /* Pods-LaundryDay.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LaundryDay.debug.xcconfig"; path = "Target Support Files/Pods-LaundryDay/Pods-LaundryDay.debug.xcconfig"; sourceTree = "<group>"; };
+		EB554B2D259A3EB3006571A3 /* GetStoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetStoreDataManager.swift; sourceTree = "<group>"; };
 		F655790736AFA7BB55360F2C /* Pods-LaundryDay.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LaundryDay.release.xcconfig"; path = "Target Support Files/Pods-LaundryDay/Pods-LaundryDay.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -180,6 +182,7 @@
 				3DF73A692584C66F00997842 /* Assets.xcassets */,
 				3DF73A6B2584C66F00997842 /* LaunchScreen.storyboard */,
 				3D346941258618F9002D2AB5 /* StoreDataManager.swift */,
+				EB554B2D259A3EB3006571A3 /* GetStoreDataManager.swift */,
 				3DEDE1F02587D3F000D2BB2B /* StoreListVC.swift */,
 				3D34695F25875DC6002D2AB5 /* MyPage */,
 				3D4E4F5A258A4CEA00BE9FFF /* Custom */,
@@ -356,6 +359,7 @@
 			files = (
 				3DD432C5258BA5370020594E /* JoinVC.swift in Sources */,
 				3DEDE1F12587D3F000D2BB2B /* StoreListVC.swift in Sources */,
+				EB554B2E259A3EB3006571A3 /* GetStoreDataManager.swift in Sources */,
 				3DD8D4E425922E4700598FDA /* String.swift in Sources */,
 				3D34695C25875DA4002D2AB5 /* MyPageCustomView.swift in Sources */,
 				3DF73A652584C66C00997842 /* ViewController.swift in Sources */,

@@ -7,14 +7,13 @@
 
 import Foundation
 import Firebase
+import RealmSwift
 
-
-//
-//class RecentViewedData: Object {
-//    @objc dynamic var id = ""
-//    @objc dynamic var date = Date()
-//    
-//    override static func primaryKey() -> String? {
-//        return "id"
-//    }
-//}
+class RecentViewedData: Object {
+    @objc dynamic var id = ""
+    @objc dynamic var date = Date()
+    
+    override static func primaryKey() -> String? {
+        return "id"
+    }
+}
