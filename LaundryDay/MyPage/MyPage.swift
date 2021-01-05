@@ -65,7 +65,7 @@ class MyPage: UIViewController, GetStoreDataManagerDelegate {
     
     lazy var recentViewedStore: UIButton = {
         let button = UIButton()
-        button.setTitle("최근 본 세탁소", for: .normal)
+        button.setTitle("최근 본 세탁소 >", for: .normal)
         button.setTitleColor(.titleBlue, for: .normal)
         button.addTarget(self, action: #selector(recentViewedButtonAction), for: .touchUpInside)
         return button
@@ -73,7 +73,7 @@ class MyPage: UIViewController, GetStoreDataManagerDelegate {
     
     lazy var favoriteStore: UIButton = {
         let button = UIButton()
-        button.setTitle("찜한 세탁소", for: .normal)
+        button.setTitle("찜한 세탁소 >", for: .normal)
         button.setTitleColor(.titleBlue, for: .normal)
         button.addTarget(self, action: #selector(favoriteButtonAction), for: .touchUpInside)
         return button

@@ -150,12 +150,13 @@ extension StoreListVC: UITableViewDelegate, UITableViewDataSource {
         cell.storeAddressLabel.text = storeData![indexPath.section].address
         cell.storeData = storeData![indexPath.section]
         
-        if realm.objects(FavoriteData.self).filter("id == %@", storeData![indexPath.section].id).first != nil {
+        if realm.objects(FavoriteData.self).filter("id == %@", storeData![indexPath.section].id ?? "").first != nil {
             cell.favoriteButtonStatus = .on
+            cell.favoriteButton.tintColor = .red
         } else {
             cell.favoriteButtonStatus = .off
+            cell.favoriteButton.tintColor = .gray
         }
-        
        // 셀 선택시 회색으로 바뀌지 않게 설정
         let backgroundView = UIView()
         backgroundView.backgroundColor = .clear

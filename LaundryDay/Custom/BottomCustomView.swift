@@ -47,6 +47,7 @@ class BottomCustomView: UIViewController {
         storeNameLabel.text = bottomViewData?.name
         storeAddressLabel.text = bottomViewData?.address
         storePhoneNum = bottomViewData?.phoneNum ?? ""
+
         favoriteButtonLayout()
 
         

@@ -33,20 +33,14 @@ class StoreListCustomView: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        favoriteButtonLayout()
+    
+ 
+   
     }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
     }
     
-    func favoriteButtonLayout() {
-        if favoriteButtonStatus == .off {
-            favoriteButton.tintColor = .gray
-        } else if favoriteButtonStatus == .on {
-            favoriteButton.tintColor = .red
-        }
-    }
 
     @IBAction func favoriteButtonAction(_ sender: Any) {
         if favoriteButtonStatus == .off {
@@ -66,7 +60,7 @@ class StoreListCustomView: UITableViewCell {
         let objectToDelete = realm.objects(FavoriteData.self).filter("id == %@", id)
         
         favoriteData.id = id
-        print(id)
+        print(favoriteButtonStatus)
         try! realm.write{
             if favoriteButtonStatus == .off {
                 realm.add(favoriteData, update: .modified)
