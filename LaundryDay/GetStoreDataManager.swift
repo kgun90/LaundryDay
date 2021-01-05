@@ -10,16 +10,17 @@ import Firebase
 
 protocol GetStoreDataManagerDelegate {
     func getStoreData(_ data: StoreData)
+    func getFavData(_ data: StoreData)
 }
 
 struct GetStoreDataManager {
     var delegate: GetStoreDataManagerDelegate?
     let fs = Firestore.firestore()
        
-    func getStoreDataByID(_ storeID: String) {
+    func getStoreDataByID(_ storeID: String, _ mode: ListMode) {
         fs.collection("LAUNDRY").document(storeID).getDocument { (document, erroe) in
             if let document = document, document.exists {
-                let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+
                 let data = document.data()
                 let storeData = StoreData(address: data!["address"] as! String,
                                           name: data!["name"] as! String,
@@ -27,7 +28,13 @@ struct GetStoreDataManager {
                                           phoneNum: data!["number"] as! String,
                                           type: data!["type"] as! String,
                                           id: storeID)
-                self.delegate?.getStoreData(storeData)
+                if mode == .RecentViewedStore {
+                    self.delegate?.getStoreData(storeData)
+                } else if mode == .FavoriteStore {
+                    self.delegate?.getFavData(storeData)
+                }
+                
+               
             }
         }
     }

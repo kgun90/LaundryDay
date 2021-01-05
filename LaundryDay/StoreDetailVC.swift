@@ -186,13 +186,7 @@ class StoreDetailVC: UIViewController {
         addRecentData()
 
     }
-    override func viewWillDisappear(_ animated: Bool) {
-        let recentViewedData = realm.objects(RecentViewedData.self).sorted(byKeyPath: "date", ascending: true)
-        recentViewedData.forEach {
-            print($0.id)
-        }
-    }
-    
+     
     func addRecentData() {
         let storeData = RecentViewedData()
 

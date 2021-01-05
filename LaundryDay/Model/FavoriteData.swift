@@ -1,17 +1,16 @@
 //
-//  RecentViewdData.swift
+//  FavoriteData.swift
 //  LaundryDay
 //
-//  Created by Geon Kang on 2020/12/23.
+//  Created by Geon Kang on 2020/12/30.
 //
 
 import Foundation
 import RealmSwift
 
-class RecentViewedData: Object {
+class FavoriteData: Object {
     @objc dynamic var id = ""
-    @objc dynamic var date = Date()
-    
+   
     override static func primaryKey() -> String? {
         return "id"
     }

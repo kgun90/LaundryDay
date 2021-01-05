@@ -6,8 +6,14 @@
 //
 
 import UIKit
+import RealmSwift
 
 class StoreListCustomView: UITableViewCell {
+    
+    enum buttonStatus {
+        case on
+        case off
+    }
     
     @IBOutlet weak var favoriteButton: UIButton!
     @IBOutlet weak var storeNameLabel: UILabel!
@@ -20,13 +26,54 @@ class StoreListCustomView: UITableViewCell {
     @IBOutlet weak var phoneButton: UIButton!
     @IBOutlet weak var mapButton: UIButton!
     
+    var favoriteButtonStatus: buttonStatus?
+    var realm = try! Realm()
+    var storeData: StoreData?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        favoriteButtonLayout()
     }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
     }
+    
+    func favoriteButtonLayout() {
+        if favoriteButtonStatus == .off {
+            favoriteButton.tintColor = .gray
+        } else if favoriteButtonStatus == .on {
+            favoriteButton.tintColor = .red
+        }
+    }
 
+    @IBAction func favoriteButtonAction(_ sender: Any) {
+        if favoriteButtonStatus == .off {
+            favoriteAction()
+            favoriteButtonStatus = .on
+            favoriteButton.tintColor = .red
+        } else if favoriteButtonStatus == .on {
+            favoriteAction()
+            favoriteButtonStatus = .off
+            favoriteButton.tintColor = .gray
+        }
+    }
+    
+    func favoriteAction() {
+        let favoriteData = FavoriteData()
+        let id = storeData!.id
+        let objectToDelete = realm.objects(FavoriteData.self).filter("id == %@", id)
+        
+        favoriteData.id = id
+        print(id)
+        try! realm.write{
+            if favoriteButtonStatus == .off {
+                realm.add(favoriteData, update: .modified)
+            } else if favoriteButtonStatus == .on {
+                realm.delete(objectToDelete)
+            }
+           
+        }
+    }
 }

@@ -11,6 +11,7 @@ import SnapKit
 import DLRadioButton
 import BonsaiController
 import CoreLocation
+import RealmSwift
 
 private enum TransitionType {
     case none
@@ -20,10 +21,7 @@ private enum TransitionType {
 }
 
 class ViewController: UIViewController, StoreDataDelegate {
-  
-    
-  
-    
+      
     lazy var topView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
@@ -73,6 +71,8 @@ class ViewController: UIViewController, StoreDataDelegate {
     var storeDataManager = StoreDataManager()
     var bottomView = BottomCustomView()
     var storeData: [StoreData]?
+    var realm = try! Realm()
+    var favoriteData: Results<FavoriteData>!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -180,6 +180,15 @@ class ViewController: UIViewController, StoreDataDelegate {
         
         btmView.storeDistance = String(format: "%.1fkm", distance/1000.0)
         btmView.bottomViewData = data
+     
+        if realm.objects(FavoriteData.self).filter("id == %@", data.id).first != nil {
+            btmView.favoriteButtonStatus = .on
+            print("on")
+        } else {
+            btmView.favoriteButtonStatus = .off
+            print("off")
+        }
+       
         
         present(btmView, animated: true, completion: nil)
     }
@@ -202,7 +211,8 @@ class ViewController: UIViewController, StoreDataDelegate {
         transitionType = .slide
         listPage.contentMode = .NearStore
         listPage.storeData = self.storeData
-        
+    
+    
         present(listPage, animated: true, completion: nil)
     }
 }

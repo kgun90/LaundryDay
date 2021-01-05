@@ -114,6 +114,9 @@
                     </constraints>
                     <color key="tintColor" red="0.72941176470000002" green="0.67843137249999996" blue="0.69019607839999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <state key="normal" image="heart.fill" catalog="system"/>
+                    <connections>
+                        <action selector="favoriteButtonAction:" destination="-1" eventType="touchUpInside" id="t24-8n-gFv"/>
+                    </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Store Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JtE-T5-E0j">
                     <rect key="frame" x="38" y="17.5" width="85.5" height="20"/>

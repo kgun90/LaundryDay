@@ -9,6 +9,10 @@ import UIKit
 import RealmSwift
 
 class MyPage: UIViewController, GetStoreDataManagerDelegate {
+    enum ListMode {
+        case RecentViewed
+        case Favorite
+    }
 
     lazy var topView: UIView = {
         let view = UIView()
@@ -85,41 +89,58 @@ class MyPage: UIViewController, GetStoreDataManagerDelegate {
     var getStoreDetailManager = GetStoreDataManager()
     var realm = try! Realm()
     var recentViewedData: Results<RecentViewedData>!
-    var recentViewed: StoreData?
+    var recentViewed: [StoreData] = []
+    
+    var favoriteData: Results<FavoriteData>!
+    var favData: [StoreData] = []
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .mainBackground
         getStoreDetailManager.delegate = self
-        listDataSet()
         
+        listDataSet()
+        listFavData()
         layout()
        
     }
-    override func viewWillAppear(_ animated: Bool) {
-        
-    }
+
     func listDataSet() {
         recentViewedData = realm.objects(RecentViewedData.self).sorted(byKeyPath: "date", ascending: true)
-        DispatchQueue.main.async {
-            for i in 0 ..< self.recentViewedData.count {
-                self.getStoreDetailManager.getStoreDataByID(self.recentViewedData[i].id)
-            }
-        }
-      
         
+        recentViewedData.forEach {
+            self.getStoreDetailManager.getStoreDataByID($0.id, .RecentViewedStore)
+        }
     }
     
     func getStoreData(_ data: StoreData) {
-        storeData.append(data)
+        recentViewed.append(data)
+     
+        customViewDataSet()
+    }
+    
+    func listFavData() {
+        favoriteData = realm.objects(FavoriteData.self)
+        favoriteData.forEach {
+            self.getStoreDetailManager.getStoreDataByID($0.id, .FavoriteStore)
+        }
+    }
+    
+    func getFavData(_ data: StoreData) {
+        favData.append(data)
+        
         customViewDataSet()
     }
     
     func customViewDataSet() {
-
-            self.recentViewCell.storeNameLabel.text = storeData.first!.name
-            self.recentViewCell.storeAddressLabel.text = storeData.first!.address
-  
+        self.recentViewCell.storeNameLabel.text = self.recentViewed.first?.name
+        self.recentViewCell.storeAddressLabel.text = self.recentViewed.first?.address
+        
+        self.favorite1.storeNameLabel.text = self.favData.first?.name
+        self.favorite1.storeAddressLabel.text = self.favData.first?.address
+        
+       
     }
 
     func layout() {
@@ -176,7 +197,7 @@ class MyPage: UIViewController, GetStoreDataManagerDelegate {
         }
         recentViewCell.snp.makeConstraints {
             $0.top.equalTo(recentViewedStore.snp.bottom).offset(6)
-            $0.trailing.equalTo(view.snp.trailing).offset(-14)
+            $0.trailing.equalTo(view.snp.trailing).offset(-10)
             $0.width.equalTo(Device.screenWidth * 0.85)
         }
         
@@ -187,17 +208,17 @@ class MyPage: UIViewController, GetStoreDataManagerDelegate {
         
         favorite1.snp.makeConstraints {
             $0.top.equalTo(favoriteStore.snp.bottom).offset(6)
-            $0.trailing.equalTo(view.snp.trailing).offset(-14)
+            $0.trailing.equalTo(view.snp.trailing).offset(-10)
             $0.width.equalTo(Device.screenWidth * 0.85)
         }
         favorite2.snp.makeConstraints {
             $0.top.equalTo(favorite1.snp.bottom).offset(11)
-            $0.trailing.equalTo(view.snp.trailing).offset(-14)
+            $0.trailing.equalTo(view.snp.trailing).offset(-10)
             $0.width.equalTo(Device.screenWidth * 0.85)
         }
         favorite3.snp.makeConstraints {
             $0.top.equalTo(favorite2.snp.bottom).offset(11)
-            $0.trailing.equalTo(view.snp.trailing).offset(-14)
+            $0.trailing.equalTo(view.snp.trailing).offset(-10)
             $0.width.equalTo(Device.screenWidth * 0.85)
         }
     }
@@ -213,7 +234,7 @@ class MyPage: UIViewController, GetStoreDataManagerDelegate {
         
         vc.modalPresentationStyle = .overFullScreen
         vc.contentMode = .RecentViewedStore
-        vc.storeData = self.storeData
+        vc.storeData = self.recentViewed
      
         present(vc, animated: true, completion: nil)
         
@@ -221,8 +242,10 @@ class MyPage: UIViewController, GetStoreDataManagerDelegate {
     
     @objc func favoriteButtonAction() {
         let vc = StoreListVC()
-        vc.contentMode = .FavoriteStore
         vc.modalPresentationStyle = .overFullScreen
+        vc.contentMode = .FavoriteStore
+        vc.storeData = self.favData
+        
         present(vc, animated: true, completion: nil)
     }
 }
