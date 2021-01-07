@@ -8,6 +8,10 @@
 import UIKit
 import RealmSwift
 
+protocol StoreListCellDelegate {
+    func favoriteReload()
+}
+
 class StoreListCustomView: UITableViewCell {
     
     enum buttonStatus {
@@ -29,6 +33,8 @@ class StoreListCustomView: UITableViewCell {
     var favoriteButtonStatus: buttonStatus?
     var realm = try! Realm()
     var storeData: StoreData?
+    
+    var delegate: StoreListCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -52,6 +58,7 @@ class StoreListCustomView: UITableViewCell {
             favoriteButtonStatus = .off
             favoriteButton.tintColor = .gray
         }
+        self.delegate?.favoriteReload()
     }
     
     func favoriteAction() {

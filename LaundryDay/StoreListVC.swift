@@ -7,6 +7,7 @@
 
 import UIKit
 import RealmSwift
+import Foundation
 
 enum ListMode{
     case NearStore
@@ -14,9 +15,11 @@ enum ListMode{
     case FavoriteStore
 }
 
-class StoreListVC: UIViewController {
- 
+class StoreListVC: UIViewController, StoreListCellDelegate {
+
     
+ 
+    // MARK: - UI Settings
     lazy var topView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
@@ -58,12 +61,12 @@ class StoreListVC: UIViewController {
     let realm = try! Realm()
     var recentViewedData: Results<RecentViewedData>!
     var getStoreDetailManager = GetStoreDataManager()
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableViewSet()
         layout()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -91,6 +94,12 @@ class StoreListVC: UIViewController {
         storeTableView.register(UINib(nibName: "StoreListCustomView", bundle: nil), forCellReuseIdentifier: "StoreListCustomView")
     }
     
+    func favoriteReload() {
+//        self.storeTableView.deleteRows(at: <#T##[IndexPath]#>, with: <#T##UITableView.RowAnimation#>)
+        self.storeTableView.reloadData()
+        
+    }
+   // MARK: - UI Layout Setting
     func layout() {
         view.backgroundColor = .mainBackground
         view.addSubview(topView)
@@ -149,6 +158,8 @@ extension StoreListVC: UITableViewDelegate, UITableViewDataSource {
         cell.storeNameLabel.text = storeData![indexPath.section].name
         cell.storeAddressLabel.text = storeData![indexPath.section].address
         cell.storeData = storeData![indexPath.section]
+        cell.delegate = self
+        
         
         if realm.objects(FavoriteData.self).filter("id == %@", storeData![indexPath.section].id ?? "").first != nil {
             cell.favoriteButtonStatus = .on

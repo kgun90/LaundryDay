@@ -44,6 +44,7 @@
 		EB1C515A259A0C8B004BD6A9 /* Pods_LaundryDay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8863594A827B14F24F61827B /* Pods_LaundryDay.framework */; };
 		EB554B2E259A3EB3006571A3 /* GetStoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB554B2D259A3EB3006571A3 /* GetStoreDataManager.swift */; };
 		EB554B31259CA6F3006571A3 /* FavoriteData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB554B30259CA6F3006571A3 /* FavoriteData.swift */; };
+		EB554B8525A72998006571A3 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB554B8425A72998006571A3 /* UIViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -87,6 +88,7 @@
 		D48C39F6493E23CC9D943F5A /* Pods-LaundryDay.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LaundryDay.debug.xcconfig"; path = "Target Support Files/Pods-LaundryDay/Pods-LaundryDay.debug.xcconfig"; sourceTree = "<group>"; };
 		EB554B2D259A3EB3006571A3 /* GetStoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetStoreDataManager.swift; sourceTree = "<group>"; };
 		EB554B30259CA6F3006571A3 /* FavoriteData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteData.swift; sourceTree = "<group>"; };
+		EB554B8425A72998006571A3 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		F655790736AFA7BB55360F2C /* Pods-LaundryDay.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LaundryDay.release.xcconfig"; path = "Target Support Files/Pods-LaundryDay/Pods-LaundryDay.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -109,6 +111,7 @@
 				3D3469522587470D002D2AB5 /* UIFont.swift */,
 				3DEDE1ED25876BEB00D2BB2B /* UIView.swift */,
 				3DD8D4E325922E4700598FDA /* String.swift */,
+				EB554B8425A72998006571A3 /* UIViewController.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -362,6 +365,7 @@
 			files = (
 				3DD432C5258BA5370020594E /* JoinVC.swift in Sources */,
 				3DEDE1F12587D3F000D2BB2B /* StoreListVC.swift in Sources */,
+				EB554B8525A72998006571A3 /* UIViewController.swift in Sources */,
 				EB554B2E259A3EB3006571A3 /* GetStoreDataManager.swift in Sources */,
 				3DD8D4E425922E4700598FDA /* String.swift in Sources */,
 				3D34695C25875DA4002D2AB5 /* MyPageCustomView.swift in Sources */,

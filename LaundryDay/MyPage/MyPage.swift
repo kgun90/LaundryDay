@@ -7,6 +7,7 @@
 
 import UIKit
 import RealmSwift
+import FirebaseAuth
 
 class MyPage: UIViewController, GetStoreDataManagerDelegate {
     enum ListMode {
@@ -62,7 +63,7 @@ class MyPage: UIViewController, GetStoreDataManagerDelegate {
         button.contentHorizontalAlignment = .center
         return button
     }()
-    
+
     lazy var recentViewedStore: UIButton = {
         let button = UIButton()
         button.setTitle("최근 본 세탁소 >", for: .normal)
@@ -76,6 +77,15 @@ class MyPage: UIViewController, GetStoreDataManagerDelegate {
         button.setTitle("찜한 세탁소 >", for: .normal)
         button.setTitleColor(.titleBlue, for: .normal)
         button.addTarget(self, action: #selector(favoriteButtonAction), for: .touchUpInside)
+        return button
+    }()
+    
+    lazy var logoutButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("로그아웃하기", for: .normal)
+        button.setTitleColor(.lightGray, for: .normal)
+        button.titleLabel?.font = .BasicFont(.semiBold, size: 13)
+        button.addTarget(self, action: #selector(logoutAction), for: .touchUpInside)
         return button
     }()
     
@@ -103,6 +113,7 @@ class MyPage: UIViewController, GetStoreDataManagerDelegate {
         listDataSet()
         listFavData()
         layout()
+        loginCheck()
        
     }
 
@@ -139,10 +150,54 @@ class MyPage: UIViewController, GetStoreDataManagerDelegate {
         
         self.favorite1.storeNameLabel.text = self.favData.first?.name
         self.favorite1.storeAddressLabel.text = self.favData.first?.address
-        
        
     }
+    
+    func loginCheck() {
+        if let id = Auth.auth().currentUser?.email {
+            loginButton.setTitle(id, for: .normal)
+            loginButton.isEnabled = false
+            loginStatusLabel.text = "님 반갑습니다."
+            
+            
+            logoutButton.isHidden = false
+        } else {
+            myReviewButton.isEnabled = false
+            myReviewButton.setTitleColor(.lightGray, for: .normal)
+            
+            reportStoreButton.isEnabled = false
+            reportStoreButton.setTitleColor(.lightGray, for: .normal)
+            
+            logoutButton.isHidden = true
+        }
+    }
 
+    @objc func logoutAction() {
+        let firebaseAuth = Auth.auth()
+        let ok = UIAlertAction(title: "확인", style: .default) { action in
+            do {
+              try firebaseAuth.signOut()
+                let vc = ViewController()
+                if let window = UIApplication.shared.windows.first {
+                    window.rootViewController = vc
+                    UIView.transition(with: window, duration: 0.3, options: .transitionCrossDissolve, animations: nil)
+                } else {
+                    vc.modalPresentationStyle = .overFullScreen
+                    self.present(vc, animated: true, completion: nil)
+                }
+            } catch let signOutError as NSError {
+              print ("Error signing out: %@", signOutError)
+            }
+        }
+        let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        
+        let alert =  UIAlertController(title: "로그아웃", message: "진행하시겠습니까?", preferredStyle: .alert)
+        alert.addAction(ok)
+        alert.addAction(cancel)
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     func layout() {
         view.addSubview(topView)
         topView.addSubview(loginButton)
@@ -150,13 +205,17 @@ class MyPage: UIViewController, GetStoreDataManagerDelegate {
         topView.addSubview(profileImage)
         topView.addSubview(myReviewButton)
         topView.addSubview(reportStoreButton)
+        
         view.addSubview(recentViewedStore)
         view.addSubview(recentViewCell)
-        view.addSubview(favoriteStore)
         
+        view.addSubview(favoriteStore)
         view.addSubview(favorite1)
         view.addSubview(favorite2)
         view.addSubview(favorite3)
+        
+        view.addSubview(logoutButton)
+      
         
         topView.snp.makeConstraints {
             $0.top.equalToSuperview()
@@ -220,6 +279,12 @@ class MyPage: UIViewController, GetStoreDataManagerDelegate {
             $0.top.equalTo(favorite2.snp.bottom).offset(11)
             $0.trailing.equalTo(view.snp.trailing).offset(-10)
             $0.width.equalTo(Device.screenWidth * 0.85)
+            $0.height.equalTo(100)
+        }
+        
+        logoutButton.snp.makeConstraints {
+            $0.top.equalTo(favorite3.snp.bottom).offset(10)
+            $0.leading.equalTo(favorite3.snp.leading).offset(3)
         }
     }
     

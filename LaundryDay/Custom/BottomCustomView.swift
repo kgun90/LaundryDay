@@ -50,7 +50,6 @@ class BottomCustomView: UIViewController {
 
         favoriteButtonLayout()
 
-        
     }
     
     func favoriteButtonLayout() {
