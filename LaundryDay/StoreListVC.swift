@@ -95,9 +95,7 @@ class StoreListVC: UIViewController, StoreListCellDelegate {
     }
     
     func favoriteReload() {
-//        self.storeTableView.deleteRows(at: <#T##[IndexPath]#>, with: <#T##UITableView.RowAnimation#>)
         self.storeTableView.reloadData()
-        
     }
    // MARK: - UI Layout Setting
     func layout() {

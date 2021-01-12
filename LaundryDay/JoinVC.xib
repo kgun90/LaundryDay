@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -10,15 +10,17 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="JoinVC" customModule="LaundryDay" customModuleProvider="target">
             <connections>
-                <outlet property="businessOwnerRadioButton" destination="0ze-F1-8u6" id="rlU-qR-2vd"/>
                 <outlet property="emailDescriptionLabel" destination="2DI-16-K9T" id="KfX-6G-OcP"/>
                 <outlet property="emailTextField" destination="u7U-wL-LN9" id="zNN-4P-qMY"/>
-                <outlet property="generalUserRadioButton" destination="PQJ-Wt-ZFV" id="HPe-81-GI4"/>
                 <outlet property="nicknameTextField" destination="1Zw-46-qlz" id="XZt-W0-fro"/>
+                <outlet property="ownerRadioButton" destination="0ze-F1-8u6" id="rlU-qR-2vd"/>
                 <outlet property="passwordCheckDescriptionLabel" destination="Brv-mK-b38" id="Wfq-hn-LnE"/>
                 <outlet property="passwordCheckTextField" destination="OiF-HX-yjF" id="2T4-N2-WZ9"/>
                 <outlet property="passwordDescriptionLabel" destination="qxl-9C-KAf" id="PJI-aS-eIk"/>
                 <outlet property="passwordTextField" destination="fF0-8j-u8w" id="QmC-Oe-Ub1"/>
+                <outlet property="personalInformationAgreement" destination="LZ2-D4-YRk" id="Nhk-NG-Sip"/>
+                <outlet property="servicePolicyAgreement" destination="aWh-4x-Wm6" id="nzK-FE-741"/>
+                <outlet property="userRadioButton" destination="PQJ-Wt-ZFV" id="HPe-81-GI4"/>
                 <outlet property="view" destination="iN0-l3-epB" id="rxF-2h-GTF"/>
                 <outletCollection property="textFields" destination="u7U-wL-LN9" collectionClass="NSMutableArray" id="15d-bc-2Xz"/>
                 <outletCollection property="textFields" destination="fF0-8j-u8w" collectionClass="NSMutableArray" id="oGJ-CL-aZ9"/>

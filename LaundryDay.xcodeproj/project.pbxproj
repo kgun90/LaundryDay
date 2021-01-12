@@ -47,6 +47,10 @@
 		EB554B8525A72998006571A3 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB554B8425A72998006571A3 /* UIViewController.swift */; };
 		EB554B8825A771A6006571A3 /* WriteReviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB554B8725A771A6006571A3 /* WriteReviewVC.swift */; };
 		EB73522725AD91E2006A1502 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB73522625AD91E2006A1502 /* Constants.swift */; };
+		EB73522B25AE03FD006A1502 /* MyReviewTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB73522925AE03FD006A1502 /* MyReviewTableCell.swift */; };
+		EB73522C25AE03FD006A1502 /* MyReviewTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB73522A25AE03FD006A1502 /* MyReviewTableCell.xib */; };
+		EB73522F25AE0BA5006A1502 /* ReviewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB73522E25AE0BA5006A1502 /* ReviewData.swift */; };
+		EB73523225AE0DED006A1502 /* ReviewDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB73523125AE0DED006A1502 /* ReviewDataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -94,6 +98,10 @@
 		EB554B8425A72998006571A3 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		EB554B8725A771A6006571A3 /* WriteReviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteReviewVC.swift; sourceTree = "<group>"; };
 		EB73522625AD91E2006A1502 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		EB73522925AE03FD006A1502 /* MyReviewTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReviewTableCell.swift; sourceTree = "<group>"; };
+		EB73522A25AE03FD006A1502 /* MyReviewTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyReviewTableCell.xib; sourceTree = "<group>"; };
+		EB73522E25AE0BA5006A1502 /* ReviewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewData.swift; sourceTree = "<group>"; };
+		EB73523125AE0DED006A1502 /* ReviewDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +136,7 @@
 				3DA668782591A0F1002ED446 /* StoreData.swift */,
 				3DD8D5382593705A00598FDA /* Container.swift */,
 				EB73522625AD91E2006A1502 /* Constants.swift */,
+				EB73522E25AE0BA5006A1502 /* ReviewData.swift */,
 			);
 			path = CommonClass;
 			sourceTree = "<group>";
@@ -149,6 +158,8 @@
 				3DEDE1F72587DB5F00D2BB2B /* StoreListCustomView.xib */,
 				3D4E4F332589F1C800BE9FFF /* BottomCustomView.swift */,
 				3D4E4F302589F1A600BE9FFF /* BottomCustomView.xib */,
+				EB73522925AE03FD006A1502 /* MyReviewTableCell.swift */,
+				EB73522A25AE03FD006A1502 /* MyReviewTableCell.xib */,
 			);
 			path = Custom;
 			sourceTree = "<group>";
@@ -194,6 +205,7 @@
 				3DF73A6B2584C66F00997842 /* LaunchScreen.storyboard */,
 				3D346941258618F9002D2AB5 /* StoreDataManager.swift */,
 				EB554B2D259A3EB3006571A3 /* StoreListDataManager.swift */,
+				EB73523125AE0DED006A1502 /* ReviewDataManager.swift */,
 				3DEDE1F02587D3F000D2BB2B /* StoreListVC.swift */,
 				3D34695F25875DC6002D2AB5 /* MyPage */,
 				3D4E4F5A258A4CEA00BE9FFF /* Custom */,
@@ -299,6 +311,7 @@
 				3DD432C8258BC0E50020594E /* JoinVC.xib in Resources */,
 				3D34695925875D8F002D2AB5 /* MyPageCustomView.xib in Resources */,
 				3DF73A682584C66C00997842 /* Main.storyboard in Resources */,
+				EB73522C25AE03FD006A1502 /* MyReviewTableCell.xib in Resources */,
 				3D4E4F37258A0E1200BE9FFF /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -377,6 +390,7 @@
 				EB73522725AD91E2006A1502 /* Constants.swift in Sources */,
 				3D34695C25875DA4002D2AB5 /* MyPageCustomView.swift in Sources */,
 				3DF73A652584C66C00997842 /* ViewController.swift in Sources */,
+				EB73522B25AE03FD006A1502 /* MyReviewTableCell.swift in Sources */,
 				3DEDE1EE25876BEB00D2BB2B /* UIView.swift in Sources */,
 				3D4E4F342589F1C800BE9FFF /* BottomCustomView.swift in Sources */,
 				3DD8D4E725923A6F00598FDA /* StoreDetailMapVC.swift in Sources */,
@@ -386,12 +400,14 @@
 				3DF73A632584C66C00997842 /* SceneDelegate.swift in Sources */,
 				3DD432DA258CEA7E0020594E /* ReviewCustomCell.swift in Sources */,
 				EB554B8825A771A6006571A3 /* WriteReviewVC.swift in Sources */,
+				EB73522F25AE0BA5006A1502 /* ReviewData.swift in Sources */,
 				3DD8D5392593705A00598FDA /* Container.swift in Sources */,
 				3D3469532587470D002D2AB5 /* UIFont.swift in Sources */,
 				3DA668792591A0F1002ED446 /* StoreData.swift in Sources */,
 				EB554B31259CA6F3006571A3 /* FavoriteData.swift in Sources */,
 				3DD8D50C25926CD200598FDA /* EmailLoginVC.swift in Sources */,
 				3DD432CD258C894B0020594E /* StoreDetailVC.swift in Sources */,
+				EB73523225AE0DED006A1502 /* ReviewDataManager.swift in Sources */,
 				3D346942258618F9002D2AB5 /* StoreDataManager.swift in Sources */,
 				3D34694D258746CF002D2AB5 /* IndicatorView.swift in Sources */,
 				3DD8D534259344B500598FDA /* RecentViewdData.swift in Sources */,

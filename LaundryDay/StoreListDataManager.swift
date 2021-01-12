@@ -14,13 +14,12 @@ protocol StoreListDataManagerDelegate {
 }
 
 struct StoreListDataManager {
-    var delegate: StoreListDataManagerDelegate?
     let fs = Firestore.firestore()
-    var recentViewdStoreData: [StoreData] = []
+    var delegate: StoreListDataManagerDelegate?
     
     func getStoreDataByID(_ storeID: String, _ mode: ListMode) {
         
-        fs.collection("LAUNDRY").document(storeID).getDocument { (document, erroe) in
+        fs.collection(K.Table.laundry).document(storeID).getDocument { (document, erroe) in
             if let document = document, document.exists {
 
                 let data = document.data()
@@ -29,7 +28,8 @@ struct StoreListDataManager {
                                           latLon: data!["latLng"] as! GeoPoint,
                                           phoneNum: data!["number"] as! String,
                                           type: data!["type"] as! String,
-                                          id: storeID)
+                                          id: storeID
+                )
                 if mode == .RecentViewedStore {
                     self.delegate?.getRecentViewedData(storeData)
                 } else if mode == .FavoriteStore {

@@ -8,7 +8,7 @@
 import UIKit
 import DLRadioButton
 import SwiftValidator
-import FirebaseAuth
+import Firebase
 
 struct LoginData {
     let id: String
@@ -60,12 +60,12 @@ class JoinVC: UIViewController{
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = .BasicFont(.semiBold, size: 17)
         button.backgroundColor = .titleBlue
-        button.addTarget(self, action: #selector(joinAction), for: .touchUpInside)
+        button.addTarget(self, action: #selector(joinButtonAction), for: .touchUpInside)
         return button
     }()
     
-    @IBOutlet weak var generalUserRadioButton: DLRadioButton!
-    @IBOutlet weak var businessOwnerRadioButton: DLRadioButton!
+    @IBOutlet weak var userRadioButton: DLRadioButton!
+    @IBOutlet weak var ownerRadioButton: DLRadioButton!
     
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -77,7 +77,12 @@ class JoinVC: UIViewController{
     @IBOutlet weak var passwordCheckDescriptionLabel: UILabel!
     @IBOutlet var textFields: [UITextField]!
     
+    @IBOutlet weak var servicePolicyAgreement: DLRadioButton!
+    @IBOutlet weak var personalInformationAgreement: DLRadioButton!
+    
+    
     var loginData: LoginData?
+    var db = Firestore.firestore()
     
     
     override func viewDidLoad() {
@@ -85,9 +90,28 @@ class JoinVC: UIViewController{
         layout()
         textFieldLayout()
      
-        generalUserRadioButton.isSelected = true
-        generalUserRadioButton.otherButtons.append(businessOwnerRadioButton)
+        radiobuttonSet()
         
+    }
+    
+    func radiobuttonSet() {
+        // 일반사용자 항목이 선택되어 있는 상태를 Default로 설정한다.
+        userRadioButton.isSelected = true
+        userRadioButton.tag = 1
+        ownerRadioButton.tag = 2
+        userRadioButton.otherButtons.append(ownerRadioButton)
+        
+        servicePolicyAgreement.isIconSquare = true
+        personalInformationAgreement.isIconSquare = true
+        
+        userRadioButton.addTarget(self, action: #selector(radioButtonAction), for: .touchUpInside)
+        ownerRadioButton.addTarget(self, action: #selector(radioButtonAction), for: .touchUpInside)
+        servicePolicyAgreement.addTarget(self, action: #selector(radioButtonAction), for: .touchUpInside)
+        personalInformationAgreement.addTarget(self, action: #selector(radioButtonAction), for: .touchUpInside)
+    }
+    
+    @objc func radioButtonAction(_ sender: DLRadioButton) {
+        print(sender.tag)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -117,16 +141,38 @@ class JoinVC: UIViewController{
     }
 
     @IBAction func typeSelect(_ sender: DLRadioButton) {
-        
+        print(sender.tag)
     }
     
-    @objc func joinAction() {
+    @objc func joinButtonAction() {
+        let ok = UIAlertAction(title: "확인", style: .default) { action in
+            self.join()
+        }
+        let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        self.presentAlert(
+            title: "회원가입",
+            message: "진행하시겠습니까?",
+            with: ok, cancel
+        )
+    }
+    
+    func join() {
         if let email = emailTextField.text, let password = passwordTextField.text{
             //  Optional Chaning으로 Textfield의 Text 값을 Optional String 에서 String으로 사용할 수 있게 한다.
             Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
                 if let e = error {
                     print(e.localizedDescription)
                 } else {
+                    
+                    let uid = authResult?.user.uid
+                    // User 생성될 때 해당 UID 를 받아 Members에 추가한다.
+                    self.db.collection(K.Table.members).document(email).setData([
+                        "uid": uid,
+                        "nickname": self.nicknameTextField.text,
+                        "type": "0001",
+                        "email": email
+                    ])
+                    // 가입 성공 후 window 생성으로 화면전환
                     let vc = ViewController()
                     if let window = UIApplication.shared.windows.first {
                         window.rootViewController = vc
@@ -234,7 +280,7 @@ extension JoinVC: UITextFieldDelegate {
                     passwordCheckDescriptionLabel.text = "패스워드가 일치하지 않습니다"
                 }
             default:
-                print("HI")
+                print("default")
             }
             return true
         }

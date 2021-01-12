@@ -10,7 +10,8 @@ import NMapsMap
 import RealmSwift
 
 
-class StoreDetailVC: UIViewController {
+class StoreDetailVC: UIViewController, ReviewDataManagerDelegate {
+
     enum buttonStatus {
         case on
         case off
@@ -167,9 +168,11 @@ class StoreDetailVC: UIViewController {
     
     var nmapView: NMFMapView!
     var storeDetailData: StoreData?
+//    var reviewData: 
     var updateID: Int?
     let realm = try! Realm()
     var favoriteButtonStatus: buttonStatus?
+    var reviewDataManager = ReviewDataManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -177,6 +180,7 @@ class StoreDetailVC: UIViewController {
         layout()
         storeDetailMap(storeDetailData!)
         addMapViewGesture()
+        reviewDataManager.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -201,6 +205,18 @@ class StoreDetailVC: UIViewController {
             realm.add(storeData, update: .modified)
         }
     }
+    
+    func reviewRequest() {
+        if let storeID = storeDetailData?.id {
+            reviewDataManager.getReviewDataByID(storeID)
+        }
+      
+    }
+    
+    func getReviewData(_ data: ReviewData) {
+        
+    }
+    
     
     func reviewTableSet() {
         reviewTableView.delegate = self
@@ -321,10 +337,13 @@ class StoreDetailVC: UIViewController {
         mapView.addSubview(nmapView)
         
         view.addSubview(writeReviewButton)
+       
         view.addSubview(reviewTitleLabel)
         view.addSubview(rateAvgLabel)
         view.addSubview(rateAvgImage)
         view.addSubview(reviewTableView)
+        
+        view.bringSubviewToFront(writeReviewButton)
     }
     
     
@@ -460,14 +479,17 @@ class StoreDetailVC: UIViewController {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(reviewTitleLabel.snp.bottom).offset(3)
             $0.width.equalToSuperview()
-            $0.height.equalTo(Device.screenHeight * 0.3)
+            $0.height.equalTo(Device.screenHeight * 0.5)
         }
     }
 }
 
 extension StoreDetailVC: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 3
+    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -476,5 +498,17 @@ extension StoreDetailVC: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 78
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 8
+    }
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView()
+        headerView.backgroundColor = .clear
+        return headerView
+    }
     
 }

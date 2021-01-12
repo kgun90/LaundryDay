@@ -208,7 +208,6 @@ class MyPage: UIViewController, StoreListDataManagerDelegate {
         self.presentAlert(
             title: "로그아웃",
             message: "진행하시겠습니까?",
-            isCancelActionIncluded: false,
             with: ok, cancel
         )
     }
