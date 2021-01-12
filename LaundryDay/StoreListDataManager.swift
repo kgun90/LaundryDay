@@ -8,16 +8,18 @@
 import Foundation
 import Firebase
 
-protocol GetStoreDataManagerDelegate {
-    func getStoreData(_ data: StoreData)
+protocol StoreListDataManagerDelegate {
+    func getRecentViewedData(_ data: StoreData)
     func getFavData(_ data: StoreData)
 }
 
-struct GetStoreDataManager {
-    var delegate: GetStoreDataManagerDelegate?
+struct StoreListDataManager {
+    var delegate: StoreListDataManagerDelegate?
     let fs = Firestore.firestore()
-       
+    var recentViewdStoreData: [StoreData] = []
+    
     func getStoreDataByID(_ storeID: String, _ mode: ListMode) {
+        
         fs.collection("LAUNDRY").document(storeID).getDocument { (document, erroe) in
             if let document = document, document.exists {
 
@@ -29,9 +31,10 @@ struct GetStoreDataManager {
                                           type: data!["type"] as! String,
                                           id: storeID)
                 if mode == .RecentViewedStore {
-                    self.delegate?.getStoreData(storeData)
+                    self.delegate?.getRecentViewedData(storeData)
                 } else if mode == .FavoriteStore {
                     self.delegate?.getFavData(storeData)
+                    
                 }
                 
                

@@ -60,7 +60,7 @@ class StoreListVC: UIViewController, StoreListCellDelegate {
     var contentMode: ListMode = .NearStore
     let realm = try! Realm()
     var recentViewedData: Results<RecentViewedData>!
-    var getStoreDetailManager = GetStoreDataManager()
+    var getStoreDetailManager = StoreListDataManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -197,6 +197,12 @@ extension StoreListVC: UITableViewDelegate, UITableViewDataSource {
         
         vc.modalPresentationStyle = .overFullScreen
         vc.storeDetailData = self.storeData![indexPath.section]
+        
+        if realm.objects(FavoriteData.self).filter("id == %@", self.storeData![indexPath.section].id).first != nil {
+            vc.favoriteButtonStatus = .on
+        } else {
+            vc.favoriteButtonStatus = .off
+        }
         present(vc, animated: true, completion: nil)
         
     }

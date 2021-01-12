@@ -9,7 +9,7 @@ import UIKit
 import RealmSwift
 import FirebaseAuth
 
-class MyPage: UIViewController, GetStoreDataManagerDelegate {
+class MyPage: UIViewController, StoreListDataManagerDelegate {
     enum ListMode {
         case RecentViewed
         case Favorite
@@ -89,19 +89,21 @@ class MyPage: UIViewController, GetStoreDataManagerDelegate {
         return button
     }()
     
-    let recentViewCell = MyPageCustomView()
+    let myPageFavoriteCell = MyPageCustomView()
     
-    let favorite1 = MyPageCustomView()
-    let favorite2 = MyPageCustomView()
-    let favorite3 = MyPageCustomView()
+    let myPageRecentViewdCell1 = MyPageCustomView()
+    let myPageRecentViewdCell2 = MyPageCustomView()
+    let myPageRecentViewdCell3 = MyPageCustomView()
+    
+    let myPageRecentViewedCell = [MyPageCustomView(),MyPageCustomView(),MyPageCustomView()]
     
     var storeData: [StoreData] = []
-    var getStoreDetailManager = GetStoreDataManager()
+    var getStoreDetailManager = StoreListDataManager()
     var realm = try! Realm()
-    var recentViewedData: Results<RecentViewedData>!
+    var recentViewedResult: Results<RecentViewedData>!
     var recentViewed: [StoreData] = []
     
-    var favoriteData: Results<FavoriteData>!
+    var favoriteResult: Results<FavoriteData>!
     var favData: [StoreData] = []
 
     
@@ -110,46 +112,58 @@ class MyPage: UIViewController, GetStoreDataManagerDelegate {
         view.backgroundColor = .mainBackground
         getStoreDetailManager.delegate = self
         
-        listDataSet()
+        listRecentViewedSet()
         listFavData()
         layout()
         loginCheck()
        
     }
-
-    func listDataSet() {
-        recentViewedData = realm.objects(RecentViewedData.self).sorted(byKeyPath: "date", ascending: true)
-        
-        recentViewedData.forEach {
-            self.getStoreDetailManager.getStoreDataByID($0.id, .RecentViewedStore)
-        }
-    }
-    
-    func getStoreData(_ data: StoreData) {
-        recentViewed.append(data)
-     
-        customViewDataSet()
-    }
     
     func listFavData() {
-        favoriteData = realm.objects(FavoriteData.self)
-        favoriteData.forEach {
+        favoriteResult = realm.objects(FavoriteData.self)
+        favoriteResult.forEach {
             self.getStoreDetailManager.getStoreDataByID($0.id, .FavoriteStore)
         }
+       
     }
     
     func getFavData(_ data: StoreData) {
         favData.append(data)
-        
-        customViewDataSet()
+        favoriteDataSet()
     }
     
-    func customViewDataSet() {
-        self.recentViewCell.storeNameLabel.text = self.recentViewed.first?.name
-        self.recentViewCell.storeAddressLabel.text = self.recentViewed.first?.address
+    func favoriteDataSet() {
+        self.myPageFavoriteCell.storeNameLabel.text = self.favData.first?.name
+        self.myPageFavoriteCell.storeAddressLabel.text = self.favData.first?.address
+        self.myPageFavoriteCell.storeData = self.favData.first
+
+    }
+    
+    func listRecentViewedSet() {
+        recentViewedResult = realm.objects(RecentViewedData.self).sorted(byKeyPath: "date", ascending: true)
         
-        self.favorite1.storeNameLabel.text = self.favData.first?.name
-        self.favorite1.storeAddressLabel.text = self.favData.first?.address
+        recentViewedResult.forEach {
+            self.getStoreDetailManager.getStoreDataByID($0.id, .RecentViewedStore)
+        }
+       
+    }
+    
+    func getRecentViewedData(_ data: StoreData) {
+        recentViewed.append(data)
+       
+        if recentViewed.count > 3 {
+            recentViewedDataSet()
+        }
+        
+    }
+    
+    func recentViewedDataSet() {
+        
+        print(self.recentViewed)
+        for i in 0 ..< 3 {
+            myPageRecentViewedCell[i].storeNameLabel.text = self.recentViewed[i].name
+            myPageRecentViewedCell[i].storeData = self.recentViewed[i]
+        }
        
     }
     
@@ -190,12 +204,13 @@ class MyPage: UIViewController, GetStoreDataManagerDelegate {
             }
         }
         let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
-        
-        let alert =  UIAlertController(title: "로그아웃", message: "진행하시겠습니까?", preferredStyle: .alert)
-        alert.addAction(ok)
-        alert.addAction(cancel)
-        
-        self.present(alert, animated: true, completion: nil)
+
+        self.presentAlert(
+            title: "로그아웃",
+            message: "진행하시겠습니까?",
+            isCancelActionIncluded: false,
+            with: ok, cancel
+        )
     }
     
     func layout() {
@@ -207,13 +222,14 @@ class MyPage: UIViewController, GetStoreDataManagerDelegate {
         topView.addSubview(reportStoreButton)
         
         view.addSubview(recentViewedStore)
-        view.addSubview(recentViewCell)
+        view.addSubview(myPageFavoriteCell)
         
         view.addSubview(favoriteStore)
-        view.addSubview(favorite1)
-        view.addSubview(favorite2)
-        view.addSubview(favorite3)
         
+        for i in 0 ..< 3 {
+            view.addSubview(myPageRecentViewedCell[i])
+        }
+
         view.addSubview(logoutButton)
       
         
@@ -250,41 +266,36 @@ class MyPage: UIViewController, GetStoreDataManagerDelegate {
             $0.height.equalTo(40)
         }
         
-        recentViewedStore.snp.makeConstraints {
+        favoriteStore.snp.makeConstraints {
             $0.top.equalTo(topView.snp.bottom).offset(30)
             $0.leading.equalTo(view.snp.leading).offset(37)
         }
-        recentViewCell.snp.makeConstraints {
-            $0.top.equalTo(recentViewedStore.snp.bottom).offset(6)
-            $0.trailing.equalTo(view.snp.trailing).offset(-10)
-            $0.width.equalTo(Device.screenWidth * 0.85)
-        }
-        
-        favoriteStore.snp.makeConstraints {
-            $0.top.equalTo(recentViewCell.snp.bottom).offset(20)
-            $0.leading.equalTo(view.snp.leading).offset(37)
-        }
-        
-        favorite1.snp.makeConstraints {
+        myPageFavoriteCell.snp.makeConstraints {
             $0.top.equalTo(favoriteStore.snp.bottom).offset(6)
             $0.trailing.equalTo(view.snp.trailing).offset(-10)
             $0.width.equalTo(Device.screenWidth * 0.85)
         }
-        favorite2.snp.makeConstraints {
-            $0.top.equalTo(favorite1.snp.bottom).offset(11)
-            $0.trailing.equalTo(view.snp.trailing).offset(-10)
-            $0.width.equalTo(Device.screenWidth * 0.85)
-        }
-        favorite3.snp.makeConstraints {
-            $0.top.equalTo(favorite2.snp.bottom).offset(11)
-            $0.trailing.equalTo(view.snp.trailing).offset(-10)
-            $0.width.equalTo(Device.screenWidth * 0.85)
-            $0.height.equalTo(100)
+        
+        recentViewedStore.snp.makeConstraints {
+            $0.top.equalTo(myPageFavoriteCell.snp.bottom).offset(20)
+            $0.leading.equalTo(view.snp.leading).offset(37)
         }
         
+        for i in 0 ..< 3 {
+            myPageRecentViewedCell[i].snp.makeConstraints {
+                if i == 0 {
+                    $0.top.equalTo(recentViewedStore.snp.bottom).offset(6)
+                } else {
+                    $0.top.equalTo(myPageRecentViewedCell[i-1].snp.bottom).offset(11)
+                }
+                $0.trailing.equalTo(view.snp.trailing).offset(-10)
+                $0.width.equalTo(Device.screenWidth * 0.85)
+            }
+        }
+//
         logoutButton.snp.makeConstraints {
-            $0.top.equalTo(favorite3.snp.bottom).offset(10)
-            $0.leading.equalTo(favorite3.snp.leading).offset(3)
+            $0.top.equalTo(myPageRecentViewedCell[2].snp.bottom).offset(10)
+            $0.leading.equalTo(myPageRecentViewedCell[2].snp.leading).offset(3)
         }
     }
     
@@ -313,4 +324,6 @@ class MyPage: UIViewController, GetStoreDataManagerDelegate {
         
         present(vc, animated: true, completion: nil)
     }
+    
+ 
 }

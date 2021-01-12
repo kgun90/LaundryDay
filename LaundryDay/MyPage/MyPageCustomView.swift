@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class MyPageCustomView: UIView {
     @IBOutlet weak var storeNameLabel: UILabel!
@@ -13,6 +14,11 @@ class MyPageCustomView: UIView {
     @IBOutlet weak var storeAddressLabel: UILabel!
     @IBOutlet weak var storeDialView: UIView!
     @IBOutlet weak var storeRouteView: UIView!
+    @IBOutlet var myPageCustomView: UIView!
+    
+    
+    var storeData: StoreData?
+    let realm = try! Realm()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -29,7 +35,41 @@ class MyPageCustomView: UIView {
         
         view.frame = self.bounds
                 
-
+        addViewTapGesture()
         self.addSubview(view)
     }
+    
+    func addViewTapGesture() {
+        print("view Tapped")
+        let singleTapGesture = UITapGestureRecognizer(target: self, action: #selector(tapAction))
+        singleTapGesture.numberOfTouchesRequired = 1
+        myPageCustomView.addGestureRecognizer(singleTapGesture)
+    }
+    
+    @objc func tapAction() {
+        let vc = StoreDetailVC()
+        vc.modalPresentationStyle = .overFullScreen
+        vc.storeDetailData = storeData
+        
+        if realm.objects(FavoriteData.self).filter("id == %@", storeData!.id).first != nil {
+            vc.favoriteButtonStatus = .on
+        } else {
+            vc.favoriteButtonStatus = .off
+        }
+        let currentController = self.getCurrentViewController()
+        currentController?.present(vc, animated: true, completion: nil)
+        
+    }
+    
+    func getCurrentViewController() -> UIViewController? {
+        if let rootController = UIApplication.shared.keyWindow?.rootViewController {
+            var currentController: UIViewController! = rootController
+            while (currentController.presentedViewController != nil) {
+                currentController = currentController.presentedViewController
+            }
+            return currentController
+        }
+        return nil
+    }
+    
 }

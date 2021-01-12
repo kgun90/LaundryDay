@@ -11,6 +11,10 @@ import RealmSwift
 
 
 class StoreDetailVC: UIViewController {
+    enum buttonStatus {
+        case on
+        case off
+    }
  
     lazy var topView: UIView = {
         let view = UIView()
@@ -86,6 +90,7 @@ class StoreDetailVC: UIViewController {
         let button = UIButton()
         button.setImage(UIImage(systemName: "heart.fill"), for: .normal)
         button.tintColor = UIColor(hex: 0xbaadb0)
+        button.addTarget(self, action: #selector(favoriteAction), for: .touchUpInside)
         return button
     }()
     
@@ -127,6 +132,7 @@ class StoreDetailVC: UIViewController {
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = .BasicFont(.semiBold, size: 17)
         button.backgroundColor = .titleBlue
+        button.addTarget(self, action: #selector(writeAction), for: .touchUpInside)
         return button
     }()
     
@@ -159,14 +165,11 @@ class StoreDetailVC: UIViewController {
         return tv
     }()
     
-    var storeName = ""
-    var storePhone = ""
-    var storeAddress = ""
-    
     var nmapView: NMFMapView!
     var storeDetailData: StoreData?
     var updateID: Int?
     let realm = try! Realm()
+    var favoriteButtonStatus: buttonStatus?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -184,6 +187,7 @@ class StoreDetailVC: UIViewController {
         storePhoneButton.setTitle(storeDetailData?.phoneNum, for: .normal)
         addressLabel.text = storeDetailData?.address
         addRecentData()
+        favoriteButtonLayout()
 
     }
      
@@ -237,6 +241,43 @@ class StoreDetailVC: UIViewController {
         }
     }
     
+    func favoriteButtonLayout() {
+        if favoriteButtonStatus == .off {
+            favoriteButton.tintColor = .gray
+        } else if favoriteButtonStatus == .on {
+            favoriteButton.tintColor = .red
+        }
+    }
+    
+    @objc func favoriteAction() {
+        if favoriteButtonStatus == .off {
+            favoriteControl()
+            favoriteButtonStatus = .on
+            favoriteButton.tintColor = .red
+            
+        } else if favoriteButtonStatus == .on {
+            favoriteControl()
+            favoriteButtonStatus = .off
+            favoriteButton.tintColor = .gray
+        }
+    }
+    
+    func favoriteControl() {
+        let favoriteData = FavoriteData()
+        let id = storeDetailData!.id
+        let objectToDelete = realm.objects(FavoriteData.self).filter("id == %@", id)
+        
+        favoriteData.id = id
+        
+        try! realm.write{
+            if favoriteButtonStatus == .off {
+                realm.add(favoriteData, update: .modified)
+            } else if favoriteButtonStatus == .on {
+                realm.delete(objectToDelete)
+            }
+        }
+    }
+    
     func addMapViewGesture() {
         let singleTapGesture = UITapGestureRecognizer(target: self, action: #selector(tapAction))
         singleTapGesture.numberOfTouchesRequired = 1
@@ -249,7 +290,15 @@ class StoreDetailVC: UIViewController {
         vc.storeData = self.storeDetailData
         present(vc, animated: true, completion: nil)
     }
-
+    
+    @objc func writeAction() {
+        let vc = WriteReviewVC()
+        vc.modalPresentationStyle = .overFullScreen
+        vc.storeName = storeNameLabel.text ?? ""
+        vc.storeData = self.storeDetailData
+        present(vc, animated: true, completion: nil)
+    }
+// MARK: - View Layout
     func addView() {
         view.backgroundColor = .mainBackground
         view.addSubview(topView)
@@ -347,7 +396,7 @@ class StoreDetailVC: UIViewController {
         
         favoriteButton.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.trailing.equalToSuperview().offset(38)
+            $0.trailing.equalToSuperview().offset(-38)
             $0.width.equalTo(20)
             $0.height.equalTo(20)
         }

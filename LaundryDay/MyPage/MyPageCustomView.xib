@@ -10,6 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MyPageCustomView" customModule="LaundryDay" customModuleProvider="target">
             <connections>
+                <outlet property="myPageCustomView" destination="iN0-l3-epB" id="kec-H7-kod"/>
                 <outlet property="storeAddressLabel" destination="e0y-rZ-mFo" id="umt-AL-Rjh"/>
                 <outlet property="storeDialView" destination="bqc-Jg-PHH" id="Mj5-cm-C9J"/>
                 <outlet property="storeDistanceLabel" destination="mLZ-1t-vCt" id="E3j-YK-ZVI"/>

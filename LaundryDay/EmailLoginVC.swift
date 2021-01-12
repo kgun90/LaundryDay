@@ -8,6 +8,7 @@
 import UIKit
 import Firebase
 
+
 class EmailLoginVC: UIViewController {
 
     lazy var logoImage: UIImageView = {
