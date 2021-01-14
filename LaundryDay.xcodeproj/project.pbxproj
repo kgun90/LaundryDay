@@ -42,6 +42,7 @@
 		3DF73A6A2584C66F00997842 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3DF73A692584C66F00997842 /* Assets.xcassets */; };
 		3DF73A6D2584C66F00997842 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DF73A6B2584C66F00997842 /* LaunchScreen.storyboard */; };
 		E990E1580362247A351FF09A /* Pods_LaundryDay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 908EC7239C0F3BFDBD62F230 /* Pods_LaundryDay.framework */; };
+		EB00996D25AF5F0700DB1ED8 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB00996C25AF5F0700DB1ED8 /* Date.swift */; };
 		EB554B2E259A3EB3006571A3 /* StoreListDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB554B2D259A3EB3006571A3 /* StoreListDataManager.swift */; };
 		EB554B31259CA6F3006571A3 /* FavoriteData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB554B30259CA6F3006571A3 /* FavoriteData.swift */; };
 		EB554B8525A72998006571A3 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB554B8425A72998006571A3 /* UIViewController.swift */; };
@@ -93,6 +94,7 @@
 		3DF73A6E2584C66F00997842 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		908EC7239C0F3BFDBD62F230 /* Pods_LaundryDay.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LaundryDay.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B492DCC46AA149F736EA89FD /* Pods-LaundryDay.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LaundryDay.release.xcconfig"; path = "Target Support Files/Pods-LaundryDay/Pods-LaundryDay.release.xcconfig"; sourceTree = "<group>"; };
+		EB00996C25AF5F0700DB1ED8 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		EB554B2D259A3EB3006571A3 /* StoreListDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreListDataManager.swift; sourceTree = "<group>"; };
 		EB554B30259CA6F3006571A3 /* FavoriteData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteData.swift; sourceTree = "<group>"; };
 		EB554B8425A72998006571A3 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 				3DEDE1ED25876BEB00D2BB2B /* UIView.swift */,
 				3DD8D4E325922E4700598FDA /* String.swift */,
 				EB554B8425A72998006571A3 /* UIViewController.swift */,
+				EB00996C25AF5F0700DB1ED8 /* Date.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -401,6 +404,7 @@
 				3DD432DA258CEA7E0020594E /* ReviewCustomCell.swift in Sources */,
 				EB554B8825A771A6006571A3 /* WriteReviewVC.swift in Sources */,
 				EB73522F25AE0BA5006A1502 /* ReviewData.swift in Sources */,
+				EB00996D25AF5F0700DB1ED8 /* Date.swift in Sources */,
 				3DD8D5392593705A00598FDA /* Container.swift in Sources */,
 				3D3469532587470D002D2AB5 /* UIFont.swift in Sources */,
 				3DA668792591A0F1002ED446 /* StoreData.swift in Sources */,

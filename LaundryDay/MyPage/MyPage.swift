@@ -158,8 +158,6 @@ class MyPage: UIViewController, StoreListDataManagerDelegate {
     }
     
     func recentViewedDataSet() {
-        
-        print(self.recentViewed)
         for i in 0 ..< 3 {
             myPageRecentViewedCell[i].storeNameLabel.text = self.recentViewed[i].name
             myPageRecentViewedCell[i].storeData = self.recentViewed[i]

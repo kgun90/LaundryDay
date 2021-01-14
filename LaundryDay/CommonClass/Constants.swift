@@ -6,8 +6,10 @@
 //
 
 import Foundation
+import Firebase
 
 struct K {
+    static let fs = Firestore.firestore()
     
     struct Where {
         static let addressArray = "address_array"

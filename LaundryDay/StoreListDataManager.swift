@@ -14,12 +14,11 @@ protocol StoreListDataManagerDelegate {
 }
 
 struct StoreListDataManager {
-    let fs = Firestore.firestore()
     var delegate: StoreListDataManagerDelegate?
     
     func getStoreDataByID(_ storeID: String, _ mode: ListMode) {
         
-        fs.collection(K.Table.laundry).document(storeID).getDocument { (document, erroe) in
+        K.fs.collection(K.Table.laundry).document(storeID).getDocument { (document, erroe) in
             if let document = document, document.exists {
 
                 let data = document.data()

@@ -81,7 +81,6 @@ class WriteReviewVC: UIViewController {
     var storeName = ""
     var storeData: StoreData?
     let cosmosView = CosmosView()
-    let db = Firestore.firestore()
     
         
     override func viewDidLoad() {
@@ -92,8 +91,10 @@ class WriteReviewVC: UIViewController {
         
         cosmosView.rating = 5
         cosmosView.tintColor = UIColor(hex: 0xfdf74e)
-        
-        // Do any additional setup after loading the view.
+        cosmosView.settings.fillMode = .half
+        cosmosView.didFinishTouchingCosmos = { rating in
+            print(rating)
+        }
     }
     
     func layout() {
@@ -181,11 +182,11 @@ class WriteReviewVC: UIViewController {
     }
     
     @objc private func submitAction() {
-        let id = db.collection(K.Table.laundry).document(storeData?.id ?? "")
-        let writer = db.collection(K.Table.members).document(Auth.auth().currentUser?.email ?? "")
+        let id = K.fs.collection(K.Table.laundry).document(storeData?.id ?? "")
+        let writer = K.fs.collection(K.Table.members).document(Auth.auth().currentUser?.email ?? "")
         let ok = UIAlertAction(title: "확인", style: .default) { action in
             if let reviewContent = self.reviewContentTextView.text {
-                self.db.collection("REVIEW").addDocument(data: [
+                K.fs.collection(K.Table.review).addDocument(data: [
                     "laundry" : id,
                     "writer" : writer,
                     "time" : Date(),

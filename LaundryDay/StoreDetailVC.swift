@@ -8,6 +8,7 @@
 import UIKit
 import NMapsMap
 import RealmSwift
+import Firebase
 
 
 class StoreDetailVC: UIViewController, ReviewDataManagerDelegate {
@@ -173,14 +174,17 @@ class StoreDetailVC: UIViewController, ReviewDataManagerDelegate {
     let realm = try! Realm()
     var favoriteButtonStatus: buttonStatus?
     var reviewDataManager = ReviewDataManager()
+    var reviewData: [ReviewData] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         addView()
+        reviewDataManager.delegate = self
+        reviewRequest()
         layout()
         storeDetailMap(storeDetailData!)
         addMapViewGesture()
-        reviewDataManager.delegate = self
+       
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -190,9 +194,11 @@ class StoreDetailVC: UIViewController, ReviewDataManagerDelegate {
 //        storePhoneLabel.text = storeDetailData?.phoneNum
         storePhoneButton.setTitle(storeDetailData?.phoneNum, for: .normal)
         addressLabel.text = storeDetailData?.address
+        
+        
         addRecentData()
         favoriteButtonLayout()
-
+       
     }
      
     func addRecentData() {
@@ -207,6 +213,7 @@ class StoreDetailVC: UIViewController, ReviewDataManagerDelegate {
     }
     
     func reviewRequest() {
+        self.reviewData.removeAll()
         if let storeID = storeDetailData?.id {
             reviewDataManager.getReviewDataByID(storeID)
         }
@@ -214,7 +221,11 @@ class StoreDetailVC: UIViewController, ReviewDataManagerDelegate {
     }
     
     func getReviewData(_ data: ReviewData) {
+        self.reviewData.append(data)
         
+        DispatchQueue.main.async {
+            self.reviewTableView.reloadData()
+        }
     }
     
     
@@ -308,12 +319,36 @@ class StoreDetailVC: UIViewController, ReviewDataManagerDelegate {
     }
     
     @objc func writeAction() {
+        let ok = UIAlertAction(title: "확인", style: .default) { action in
+            self.moveToLogin()
+        }
+        let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        
+        if Auth.auth().currentUser?.email != nil {
+            reviewWrite()
+        } else {
+            self.presentAlert(
+                title: "로그인이 필요합니다.",
+                message: "리뷰작성을 위해 로그인 해주세요",
+                with: ok, cancel
+            )
+        }
+    }
+    
+    func moveToLogin() {
+        let vc = LoginVC()
+        vc.modalPresentationStyle = .overFullScreen
+        present(vc, animated: true, completion: nil)
+    }
+    
+    func reviewWrite() {
         let vc = WriteReviewVC()
         vc.modalPresentationStyle = .overFullScreen
         vc.storeName = storeNameLabel.text ?? ""
         vc.storeData = self.storeDetailData
         present(vc, animated: true, completion: nil)
     }
+    
 // MARK: - View Layout
     func addView() {
         view.backgroundColor = .mainBackground
@@ -479,33 +514,44 @@ class StoreDetailVC: UIViewController, ReviewDataManagerDelegate {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(reviewTitleLabel.snp.bottom).offset(3)
             $0.width.equalToSuperview()
-            $0.height.equalTo(Device.screenHeight * 0.5)
+            $0.bottom.equalTo(writeReviewButton.snp.top).offset(3)
+            
         }
     }
 }
 
 extension StoreDetailVC: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return self.reviewData.count
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+       
         let cell = tableView.dequeueReusableCell(withIdentifier: "ReviewCustomCell", for: indexPath as IndexPath) as! ReviewCustomCell
+//        let formatter = DateFormatter()
+        
     
+        cell.nicknameLabel.text = self.reviewData[indexPath.section].writer
+        cell.reviewContentLabel.text = self.reviewData[indexPath.section].content
+        cell.writeTimeLabel.text = self.reviewData[indexPath.section].time.relativeTime_abbreviated
+        
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        // Cell 의 높이 지정
         return 78
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        // Cell 의 간격 지정
         return 8
     }
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        // Header의 배경색을 투명화 해서 Cell 간의 간격을 갖게 만듬
         let headerView = UIView()
         headerView.backgroundColor = .clear
         return headerView
