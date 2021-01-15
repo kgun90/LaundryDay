@@ -19,6 +19,8 @@ class MyReviewTableCell: UITableViewCell {
     @IBOutlet weak var deleteButton: UIButton!
     @IBOutlet weak var modifyButton: UIButton!
     
+    var storeData: StoreData?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -36,8 +38,21 @@ class MyReviewTableCell: UITableViewCell {
     }
     
     @IBAction func storeNameButtonAction(_ sender: Any) {
-        
-//        let vc = StoreDetailVC()
-        print("selected")
+        let vc = StoreDetailVC()
+        vc.modalPresentationStyle = .overFullScreen
+        vc.storeDetailData = storeData
+        let currentController = self.getCurrentViewController()
+        currentController?.present(vc, animated: true, completion: nil)
+    }
+    
+    func getCurrentViewController() -> UIViewController? {
+        if let rootController = UIApplication.shared.keyWindow?.rootViewController {
+            var currentController: UIViewController! = rootController
+            while (currentController.presentedViewController != nil) {
+                currentController = currentController.presentedViewController
+            }
+            return currentController
+        }
+        return nil
     }
 }

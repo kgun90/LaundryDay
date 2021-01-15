@@ -17,7 +17,7 @@ struct ReviewDataManager {
     
     func getReviewDataByID(_ storeID: String) {
         K.fs.collection(K.Table.review)
-            .whereField("laundry", isEqualTo: K.fs.collection(K.Table.laundry).document(storeID)).order(by: "time")
+            .whereField("laundry", isEqualTo: K.fs.collection(K.Table.laundry).document(storeID)).order(by: "time", descending: true)
             .addSnapshotListener {(querySnapshot, error) in
     
             if let e = error {

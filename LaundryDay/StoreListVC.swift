@@ -14,7 +14,7 @@ enum ListMode{
     case NearStore
     case RecentViewedStore
     case FavoriteStore
-    case UserFavoriteStore
+    case UserReviewList
 }
 
 class StoreListVC: UIViewController, StoreListCellDelegate, ReviewDataManagerDelegate {
@@ -76,7 +76,7 @@ class StoreListVC: UIViewController, StoreListCellDelegate, ReviewDataManagerDel
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         setDisplayData()
-        if contentMode == .UserFavoriteStore {
+        if contentMode == .UserReviewList {
             getMyReview()
         }
     }
@@ -89,7 +89,7 @@ class StoreListVC: UIViewController, StoreListCellDelegate, ReviewDataManagerDel
             topViewLabel.text = "찜한 세탁소"
         case .RecentViewedStore:
             topViewLabel.text = "최근 본 세탁소"
-        case .UserFavoriteStore:
+        case .UserReviewList:
             topViewLabel.text = "내가 쓴 리뷰"
         }
     }
@@ -115,7 +115,7 @@ class StoreListVC: UIViewController, StoreListCellDelegate, ReviewDataManagerDel
         storeTableView.backgroundColor = .mainBackground
         
         switch contentMode {
-        case .UserFavoriteStore:
+        case .UserReviewList:
             storeTableView.register(UINib(nibName: "MyReviewTableCell", bundle: nil), forCellReuseIdentifier: "MyReviewTableCell")
         default:
             storeTableView.register(UINib(nibName: "StoreListCustomView", bundle: nil), forCellReuseIdentifier: "StoreListCustomView")
@@ -175,7 +175,7 @@ class StoreListVC: UIViewController, StoreListCellDelegate, ReviewDataManagerDel
 extension StoreListVC: UITableViewDelegate, UITableViewDataSource {
     // 섹션의 개수를 데이터의 개수만큼 생성하고, 각 섹션의 로우는 1개로 정한다.
     func numberOfSections(in tableView: UITableView) -> Int {
-        return contentMode == .UserFavoriteStore  ? reviewData.count : storeData.count
+        return contentMode == .UserReviewList  ? reviewData.count : storeData.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -184,12 +184,13 @@ extension StoreListVC: UITableViewDelegate, UITableViewDataSource {
     // 각 섹션에 해당하는 데이터를 넣으므로 indexPath.row 가 아니고 .section이 된다.
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch contentMode {
-        case .UserFavoriteStore:
+        case .UserReviewList:
             let cell = self.storeTableView.dequeueReusableCell(withIdentifier: "MyReviewTableCell", for: indexPath as IndexPath) as! MyReviewTableCell
            
             cell.reviewContentLabel.text = reviewData[indexPath.section].content
             cell.starRatingView.rating = reviewData[indexPath.section].rate
             cell.writeTimeLabel.text = reviewData[indexPath.section].time.relativeTime_abbreviated
+            
             
             let laundry = reviewData[indexPath.section].laundry
             laundry.getDocument { (doc, error) in
@@ -198,6 +199,14 @@ extension StoreListVC: UITableViewDelegate, UITableViewDataSource {
                 } else {
                     cell.storeNameLabel.setTitle("\(doc?["name"] as! String) >", for: .normal)
                     cell.storeAddressLabel.text = doc?["address"] as! String
+                    cell.storeData = StoreData(
+                        address: doc?["address"] as! String,
+                        name: doc?["name"] as! String,
+                        latLon: doc?["latLng"] as! GeoPoint,
+                        phoneNum: doc?["number"] as! String,
+                        type: doc?["type"] as! String,
+                        id: doc?.documentID ?? ""
+                    )
                 }
             }
                        
@@ -248,7 +257,7 @@ extension StoreListVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if contentMode != .UserFavoriteStore {
+        if contentMode != .UserReviewList {
             let vc = StoreDetailVC()
             
             vc.modalPresentationStyle = .overFullScreen

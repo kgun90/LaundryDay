@@ -80,12 +80,6 @@ class BottomCustomView: UIViewController {
         let vc = StoreDetailVC()
         vc.modalPresentationStyle = .overFullScreen
         vc.storeDetailData = self.bottomViewData
-        if realm.objects(FavoriteData.self).filter("id == %@", self.bottomViewData!.id).first != nil {
-            vc.favoriteButtonStatus = .on
-        } else {
-            vc.favoriteButtonStatus = .off
-        }
- 
         present(vc, animated: true, completion: nil)
     }
 

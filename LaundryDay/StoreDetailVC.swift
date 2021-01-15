@@ -178,6 +178,15 @@ class StoreDetailVC: UIViewController, ReviewDataManagerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        DispatchQueue.main.async { [self] in
+            if self.realm.objects(FavoriteData.self).filter("id == %@", storeDetailData!.id).first != nil {
+                self.favoriteButtonStatus = .on
+            } else {
+                self.favoriteButtonStatus = .off
+            }
+        }
+        
         addView()
         reviewDataManager.delegate = self
         reviewRequest()
@@ -270,6 +279,7 @@ class StoreDetailVC: UIViewController, ReviewDataManagerDelegate {
     }
     
     func favoriteButtonLayout() {
+      
         if favoriteButtonStatus == .off {
             favoriteButton.tintColor = .gray
         } else if favoriteButtonStatus == .on {
@@ -532,9 +542,7 @@ extension StoreDetailVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
        
         let cell = tableView.dequeueReusableCell(withIdentifier: "ReviewCustomCell", for: indexPath as IndexPath) as! ReviewCustomCell
-//        let formatter = DateFormatter()
-        
-    
+
         cell.nicknameLabel.text = self.reviewData[indexPath.section].writer
         cell.reviewContentLabel.text = self.reviewData[indexPath.section].content
         cell.writeTimeLabel.text = self.reviewData[indexPath.section].time.relativeTime_abbreviated

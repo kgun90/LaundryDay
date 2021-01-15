@@ -50,12 +50,6 @@ class MyPageCustomView: UIView {
         let vc = StoreDetailVC()
         vc.modalPresentationStyle = .overFullScreen
         vc.storeDetailData = storeData
-        
-        if realm.objects(FavoriteData.self).filter("id == %@", storeData!.id).first != nil {
-            vc.favoriteButtonStatus = .on
-        } else {
-            vc.favoriteButtonStatus = .off
-        }
         let currentController = self.getCurrentViewController()
         currentController?.present(vc, animated: true, completion: nil)
         

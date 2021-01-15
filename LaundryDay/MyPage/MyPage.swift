@@ -108,6 +108,7 @@ class MyPage: UIViewController, StoreListDataManagerDelegate {
     var favoriteResult: Results<FavoriteData>!
     var favData: [StoreData] = []
 
+    var myReviewData: [ReviewData] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -126,7 +127,6 @@ class MyPage: UIViewController, StoreListDataManagerDelegate {
         favoriteResult.forEach {
             self.getStoreDetailManager.getStoreDataByID($0.id, .FavoriteStore)
         }
-       
     }
     
     func getFavData(_ data: StoreData) {
@@ -134,14 +134,12 @@ class MyPage: UIViewController, StoreListDataManagerDelegate {
         DispatchQueue.main.async {
             self.favoriteDataSet()
         }
-        
     }
     
     func favoriteDataSet() {
         self.myPageFavoriteCell.storeNameLabel.text = self.favData.first?.name
         self.myPageFavoriteCell.storeAddressLabel.text = self.favData.first?.address
         self.myPageFavoriteCell.storeData = self.favData.first
-
     }
     
     func listRecentViewedSet() {
@@ -159,7 +157,6 @@ class MyPage: UIViewController, StoreListDataManagerDelegate {
         if recentViewed.count > 3 {
             recentViewedDataSet()
         }
-        
     }
     
     func recentViewedDataSet() {
@@ -320,6 +317,7 @@ class MyPage: UIViewController, StoreListDataManagerDelegate {
     
     @objc func favoriteButtonAction() {
         let vc = StoreListVC()
+        
         vc.modalPresentationStyle = .overFullScreen
         vc.contentMode = .FavoriteStore
         vc.storeData = self.favData
@@ -329,9 +327,11 @@ class MyPage: UIViewController, StoreListDataManagerDelegate {
     
     @objc func myReviewAction() {
         let vc = StoreListVC()
+        
         vc.modalPresentationStyle = .overFullScreen
-        vc.contentMode = .UserFavoriteStore
-
+        vc.contentMode = .UserReviewList
+//        vc.storyboard = self.myReviewData
+        
         present(vc, animated: true, completion: nil)
     }
     
