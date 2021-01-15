@@ -51,6 +51,7 @@ class MyPage: UIViewController, StoreListDataManagerDelegate {
         button.setTitleColor(.black, for: .normal)
         button.contentVerticalAlignment = .center
         button.contentHorizontalAlignment = .center
+        button.addTarget(self, action: #selector(myReviewAction), for: .touchUpInside)
         
         return button
     }()
@@ -129,7 +130,10 @@ class MyPage: UIViewController, StoreListDataManagerDelegate {
     
     func getFavData(_ data: StoreData) {
         favData.append(data)
-        favoriteDataSet()
+        DispatchQueue.main.async {
+            self.favoriteDataSet()
+        }
+        
     }
     
     func favoriteDataSet() {
@@ -322,5 +326,11 @@ class MyPage: UIViewController, StoreListDataManagerDelegate {
         present(vc, animated: true, completion: nil)
     }
     
- 
+    @objc func myReviewAction() {
+        let vc = StoreListVC()
+        vc.modalPresentationStyle = .overFullScreen
+        vc.contentMode = .UserFavoriteStore
+
+        present(vc, animated: true, completion: nil)
+    }
 }

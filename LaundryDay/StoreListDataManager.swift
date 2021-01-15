@@ -18,16 +18,18 @@ struct StoreListDataManager {
     
     func getStoreDataByID(_ storeID: String, _ mode: ListMode) {
         
-        K.fs.collection(K.Table.laundry).document(storeID).getDocument { (document, erroe) in
+        K.fs.collection(K.Table.laundry)
+            .document(storeID)
+            .getDocument { (document, erroe) in
             if let document = document, document.exists {
-
                 let data = document.data()
-                let storeData = StoreData(address: data!["address"] as! String,
-                                          name: data!["name"] as! String,
-                                          latLon: data!["latLng"] as! GeoPoint,
-                                          phoneNum: data!["number"] as! String,
-                                          type: data!["type"] as! String,
-                                          id: storeID
+                let storeData = StoreData(
+                    address: data!["address"] as! String,
+                    name: data!["name"] as! String,
+                    latLon: data!["latLng"] as! GeoPoint,
+                    phoneNum: data!["number"] as! String,
+                    type: data!["type"] as! String,
+                    id: storeID
                 )
                 if mode == .RecentViewedStore {
                     self.delegate?.getRecentViewedData(storeData)

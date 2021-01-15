@@ -234,6 +234,7 @@ class StoreDetailVC: UIViewController, ReviewDataManagerDelegate {
         reviewTableView.dataSource = self
         reviewTableView.separatorColor = .clear
         reviewTableView.backgroundColor = .mainBackground
+        reviewTableView.allowsSelection = false
         
         reviewTableView.register(UINib(nibName: "ReviewCustomCell", bundle: nil), forCellReuseIdentifier: "ReviewCustomCell")
     }
@@ -537,7 +538,7 @@ extension StoreDetailVC: UITableViewDelegate, UITableViewDataSource {
         cell.nicknameLabel.text = self.reviewData[indexPath.section].writer
         cell.reviewContentLabel.text = self.reviewData[indexPath.section].content
         cell.writeTimeLabel.text = self.reviewData[indexPath.section].time.relativeTime_abbreviated
-        
+        cell.starRatingView.rating = self.reviewData[indexPath.section].rate
         return cell
     }
     
@@ -556,5 +557,4 @@ extension StoreDetailVC: UITableViewDelegate, UITableViewDataSource {
         headerView.backgroundColor = .clear
         return headerView
     }
-    
 }

@@ -9,10 +9,12 @@ import UIKit
 import Cosmos
 
 class MyReviewTableCell: UITableViewCell {
+    // LAUNDRY Collection
     @IBOutlet weak var storeNameLabel: UIButton!
     @IBOutlet weak var storeAddressLabel: UILabel!
+    // REVIEW Collection
     @IBOutlet weak var reviewContentLabel: UILabel!
-    @IBOutlet weak var starRating: CosmosView!
+    @IBOutlet weak var starRatingView: CosmosView!
     @IBOutlet weak var writeTimeLabel: UILabel!
     @IBOutlet weak var deleteButton: UIButton!
     @IBOutlet weak var modifyButton: UIButton!
@@ -20,6 +22,11 @@ class MyReviewTableCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        starRatingView.settings.fillMode = .half
+        starRatingView.settings.starSize = 13
+        starRatingView.settings.starMargin = -2
+        starRatingView.settings.disablePanGestures = true
+        starRatingView.settings.updateOnTouch = false
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -28,4 +35,11 @@ class MyReviewTableCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    @IBAction func storeNameButtonAction(_ sender: Any) {
+        
+        let vc = StoreDetailVC()
+        
+        vc.modalPresentationStyle = .overFullScreen
+        self.window?.rootViewController?.present(vc, animated: true, completion:    nil)
+    }
 }

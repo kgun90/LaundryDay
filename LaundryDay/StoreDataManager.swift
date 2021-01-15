@@ -18,7 +18,9 @@ struct StoreDataManager {
    
     
     func requestFSData(_ currentAddress: String) {
-        K.fs.collection(K.Table.laundry).whereField("address_array", arrayContains: currentAddress).addSnapshotListener { (querySnapshot, error) in
+        K.fs.collection(K.Table.laundry)
+            .whereField("address_array", arrayContains: currentAddress)
+            .addSnapshotListener { (querySnapshot, error) in
             var storeInfo: [StoreData] = []
             
             if let e = error {

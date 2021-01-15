@@ -70,7 +70,7 @@ class ViewController: UIViewController, StoreDataDelegate {
     
     var storeDataManager = StoreDataManager()
     var bottomView = BottomCustomView()
-    var storeData: [StoreData]?
+    var storeData: [StoreData] = []
     var realm = try! Realm()
     var favoriteData: Results<FavoriteData>!
     

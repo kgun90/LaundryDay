@@ -13,23 +13,5 @@ struct ReviewData {
     var content: String
     var rate: Double
     var time: Date
-//    var nickname: String
-    
-    
-//    init(writer: DocumentReference, content: String, rate: Double, time: Date) {
-//        self.writer = writer
-//        self.content = content
-//        self.rate = rate
-//        self.time = time
-//        writer.getDocument { (document, error) in
-//            if let e = error {
-//                print(e.localizedDescription)
-//            } else {
-//                self.nickname = document!["nickname"] as? String
-//            }
-//        }
-//
-//    }
-//
-//
+    var laundry: DocumentReference
 }

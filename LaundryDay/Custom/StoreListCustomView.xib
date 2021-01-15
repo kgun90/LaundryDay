@@ -27,7 +27,10 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Store Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ADe-ew-9oj">
-                    <rect key="frame" x="59" y="43" width="65" height="14"/>
+                    <rect key="frame" x="59" y="43" width="200" height="14"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="200" id="xUJ-mr-Dej"/>
+                    </constraints>
                     <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="11"/>
                     <color key="textColor" red="0.6588235294117647" green="0.6470588235294118" blue="0.6470588235294118" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
