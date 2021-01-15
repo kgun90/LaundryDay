@@ -43,6 +43,8 @@
 		3DF73A6D2584C66F00997842 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DF73A6B2584C66F00997842 /* LaunchScreen.storyboard */; };
 		E990E1580362247A351FF09A /* Pods_LaundryDay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 908EC7239C0F3BFDBD62F230 /* Pods_LaundryDay.framework */; };
 		EB00996D25AF5F0700DB1ED8 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB00996C25AF5F0700DB1ED8 /* Date.swift */; };
+		EB344F8B25B1EF8F00C984D2 /* ReportStoreVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB344F8925B1EF8F00C984D2 /* ReportStoreVC.swift */; };
+		EB344F8C25B1EF8F00C984D2 /* ReportStoreVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB344F8A25B1EF8F00C984D2 /* ReportStoreVC.xib */; };
 		EB554B2E259A3EB3006571A3 /* StoreListDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB554B2D259A3EB3006571A3 /* StoreListDataManager.swift */; };
 		EB554B31259CA6F3006571A3 /* FavoriteData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB554B30259CA6F3006571A3 /* FavoriteData.swift */; };
 		EB554B8525A72998006571A3 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB554B8425A72998006571A3 /* UIViewController.swift */; };
@@ -95,6 +97,8 @@
 		908EC7239C0F3BFDBD62F230 /* Pods_LaundryDay.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LaundryDay.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B492DCC46AA149F736EA89FD /* Pods-LaundryDay.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LaundryDay.release.xcconfig"; path = "Target Support Files/Pods-LaundryDay/Pods-LaundryDay.release.xcconfig"; sourceTree = "<group>"; };
 		EB00996C25AF5F0700DB1ED8 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		EB344F8925B1EF8F00C984D2 /* ReportStoreVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportStoreVC.swift; sourceTree = "<group>"; };
+		EB344F8A25B1EF8F00C984D2 /* ReportStoreVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReportStoreVC.xib; sourceTree = "<group>"; };
 		EB554B2D259A3EB3006571A3 /* StoreListDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreListDataManager.swift; sourceTree = "<group>"; };
 		EB554B30259CA6F3006571A3 /* FavoriteData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteData.swift; sourceTree = "<group>"; };
 		EB554B8425A72998006571A3 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
@@ -222,6 +226,8 @@
 				3DD432D8258CEA7E0020594E /* ReviewCustomCell.swift */,
 				3DD432D9258CEA7E0020594E /* ReviewCustomCell.xib */,
 				EB554B8725A771A6006571A3 /* WriteReviewVC.swift */,
+				EB344F8925B1EF8F00C984D2 /* ReportStoreVC.swift */,
+				EB344F8A25B1EF8F00C984D2 /* ReportStoreVC.xib */,
 				3DF73A6E2584C66F00997842 /* Info.plist */,
 				3D4E4F36258A0E1200BE9FFF /* GoogleService-Info.plist */,
 			);
@@ -313,6 +319,7 @@
 				3DD432DB258CEA7E0020594E /* ReviewCustomCell.xib in Resources */,
 				3DD432C8258BC0E50020594E /* JoinVC.xib in Resources */,
 				3D34695925875D8F002D2AB5 /* MyPageCustomView.xib in Resources */,
+				EB344F8C25B1EF8F00C984D2 /* ReportStoreVC.xib in Resources */,
 				3DF73A682584C66C00997842 /* Main.storyboard in Resources */,
 				EB73522C25AE03FD006A1502 /* MyReviewTableCell.xib in Resources */,
 				3D4E4F37258A0E1200BE9FFF /* GoogleService-Info.plist in Resources */,
@@ -395,6 +402,7 @@
 				3DF73A652584C66C00997842 /* ViewController.swift in Sources */,
 				EB73522B25AE03FD006A1502 /* MyReviewTableCell.swift in Sources */,
 				3DEDE1EE25876BEB00D2BB2B /* UIView.swift in Sources */,
+				EB344F8B25B1EF8F00C984D2 /* ReportStoreVC.swift in Sources */,
 				3D4E4F342589F1C800BE9FFF /* BottomCustomView.swift in Sources */,
 				3DD8D4E725923A6F00598FDA /* StoreDetailMapVC.swift in Sources */,
 				3D346950258746F4002D2AB5 /* UIColor.swift in Sources */,

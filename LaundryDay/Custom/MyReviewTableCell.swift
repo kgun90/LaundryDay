@@ -37,9 +37,7 @@ class MyReviewTableCell: UITableViewCell {
     
     @IBAction func storeNameButtonAction(_ sender: Any) {
         
-        let vc = StoreDetailVC()
-        
-        vc.modalPresentationStyle = .overFullScreen
-        self.window?.rootViewController?.present(vc, animated: true, completion:    nil)
+//        let vc = StoreDetailVC()
+        print("selected")
     }
 }

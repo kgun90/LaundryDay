@@ -62,6 +62,7 @@ class MyPage: UIViewController, StoreListDataManagerDelegate {
         button.setTitleColor(.black, for: .normal)
         button.contentVerticalAlignment = .center
         button.contentHorizontalAlignment = .center
+        button.addTarget(self, action: #selector(reportStoreButtonAction), for: .touchUpInside)
         return button
     }()
 
@@ -331,6 +332,12 @@ class MyPage: UIViewController, StoreListDataManagerDelegate {
         vc.modalPresentationStyle = .overFullScreen
         vc.contentMode = .UserFavoriteStore
 
+        present(vc, animated: true, completion: nil)
+    }
+    
+    @objc func reportStoreButtonAction() {
+        let vc = ReportStoreVC()
+        vc.modalPresentationStyle = .overFullScreen
         present(vc, animated: true, completion: nil)
     }
 }
