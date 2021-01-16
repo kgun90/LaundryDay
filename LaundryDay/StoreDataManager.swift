@@ -24,11 +24,12 @@ struct StoreDataManager {
             var storeInfo: [StoreData] = []
             
             if let e = error {
-                print("There was an issue retrieving data from data from Firestore \(e)")
+                print("There was an issue retrievinig data from data from Firestore \(e)")
             } else {
                 if let snapshotDocuments = querySnapshot?.documents {
                     for doc in snapshotDocuments {
                         let data = doc.data()
+                        print(data["name"] as! String)
                         let storeID = doc.documentID
                         let newData = StoreData(
                             address: data["address"] as! String,

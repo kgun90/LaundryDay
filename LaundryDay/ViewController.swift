@@ -92,7 +92,6 @@ class ViewController: UIViewController, StoreDataDelegate {
             else {
                 return
             }
-          
             self.storeDataManager.requestFSData(location)
         }
     }

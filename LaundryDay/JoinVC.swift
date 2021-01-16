@@ -82,14 +82,12 @@ class JoinVC: UIViewController{
     
     
     var loginData: LoginData?
-    var db = Firestore.firestore()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         layout()
         textFieldLayout()
-     
         radiobuttonSet()
         
     }
@@ -166,7 +164,7 @@ class JoinVC: UIViewController{
                     
                     let uid = authResult?.user.uid
                     // User 생성될 때 해당 UID 를 받아 Members에 추가한다.
-                    self.db.collection(K.Table.members).document(email).setData([
+                    K.fs.collection(K.Table.members).document(email).setData([
                         "uid": uid,
                         "nickname": self.nicknameTextField.text,
                         "type": "0001",

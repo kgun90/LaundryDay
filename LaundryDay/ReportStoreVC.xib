@@ -17,6 +17,9 @@
                 <outlet property="storeNameTextField" destination="L2r-2C-ZIk" id="2HZ-ye-SrF"/>
                 <outlet property="storePhoneTextField" destination="aLr-yb-Xli" id="KXS-Hz-bhV"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outletCollection property="textFields" destination="L2r-2C-ZIk" collectionClass="NSMutableArray" id="ra9-Yy-XOh"/>
+                <outletCollection property="textFields" destination="aLr-yb-Xli" collectionClass="NSMutableArray" id="FwQ-pr-wxL"/>
+                <outletCollection property="textFields" destination="Tkg-us-CC6" collectionClass="NSMutableArray" id="0eg-vS-JPN"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>

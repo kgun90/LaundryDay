@@ -7,8 +7,10 @@
 
 import UIKit
 import DLRadioButton
+import Firebase
+import CoreLocation
 
-class ReportStoreVC: UIViewController {
+class ReportStoreVC: UIViewController, UITextFieldDelegate {
     lazy var topView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
@@ -40,7 +42,7 @@ class ReportStoreVC: UIViewController {
     
     lazy var submitButton: UIButton = {
         let button = UIButton()
-        button.setTitle("가입하기", for: .normal)
+        button.setTitle("제보하기", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = .BasicFont(.semiBold, size: 17)
         button.backgroundColor = .titleBlue
@@ -56,6 +58,8 @@ class ReportStoreVC: UIViewController {
     @IBOutlet weak var storePhoneTextField: UITextField!
     @IBOutlet weak var storeAddressTextField: UITextField!
 
+    @IBOutlet var textFields: [UITextField]!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         radiobuttonSet()
@@ -113,7 +117,18 @@ class ReportStoreVC: UIViewController {
             $0.bottom.equalToSuperview()
             $0.height.equalTo(Device.screenHeight * 0.1)
         }
-        
+        textFieldLayout()
+    }
+    
+    func textFieldLayout() {
+        textFields.forEach {
+            $0.borderStyle = .none
+            let border = CALayer()
+            border.frame = CGRect(x: 0, y: $0.frame.size.height - 1, width: $0.frame.width, height: 1)
+            border.backgroundColor = UIColor.black.cgColor
+            $0.layer.addSublayer(border)
+            $0.delegate = self
+        }
     }
     
     @objc func backAction() {
@@ -133,6 +148,33 @@ class ReportStoreVC: UIViewController {
     }
     
     func submitReport() {
+        if let writer = Auth.auth().currentUser?.email,
+           let name = storeNameTextField.text,
+           let address = storeAddressTextField.text,
+           let number = storePhoneTextField.text {
+            let geocoder = CLGeocoder()
+//            let geo = G
+            geocoder.geocodeAddressString(address) { (placemark, error) in
+                guard
+                    let mark = placemark?.first?.location?.coordinate
+                else {
+                    return
+                }
+                K.fs.collection(K.Table.laundry).addDocument(data:[
+                    "name": name,
+                    "type": "0001",
+                    "address": address,
+                    "address_array": address.components(separatedBy: " "),
+                    "latLng": GeoPoint(latitude: mark.latitude, longitude: mark.longitude),
+                    "writer": K.fs.collection(K.Table.members).document(writer),
+                    "time": Date(),
+                    "registered": false,
+                    "number": number
+                ]
+                )
+            }
+        }
         dismiss(animated: true, completion: nil)
     }
+    
 }

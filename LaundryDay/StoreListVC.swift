@@ -35,13 +35,7 @@ class StoreListVC: UIViewController, StoreListCellDelegate, ReviewDataManagerDel
         
         return button
     }()
-    
-    lazy var searchButton: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
-        button.tintColor = .black
-        return button
-    }()
+
     
     lazy var topViewLabel: UILabel = {
         let label = UILabel()
@@ -134,7 +128,6 @@ class StoreListVC: UIViewController, StoreListCellDelegate, ReviewDataManagerDel
         view.backgroundColor = .mainBackground
         view.addSubview(topView)
         topView.addSubview(backButton)
-//        topView.addSubview(searchButton)
         topView.addSubview(topViewLabel)
         view.addSubview(storeTableView)
         
@@ -149,10 +142,7 @@ class StoreListVC: UIViewController, StoreListCellDelegate, ReviewDataManagerDel
             $0.leading.equalToSuperview().offset(30)
             $0.bottom.equalToSuperview().offset(-15)
         }
-//        searchButton.snp.makeConstraints {
-//            $0.trailing.equalToSuperview().offset(-26)
-//            $0.centerY.equalTo(backButton.snp.centerY)
-//        }
+        
         topViewLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.centerY.equalTo(backButton.snp.centerY)
